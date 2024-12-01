@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import '../styles/navbar.css';
+import React, { useContext, useState } from 'react';
+import '../styles/header.css';
+import { login } from '../context/UserContext';
 
-const Navbar = ({ login }) => {
+export const Header = () => {
+  const { isLoggedIn, onLogout, profile } = useContext(login);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -10,13 +11,11 @@ const Navbar = ({ login }) => {
   };
 
   const profileImg =
-    login?.profile === null
-      ? '/assets/img/anonymous.jpg'
+    login?.profile === undefined
+      ? '/img/anonymous.jpg' // 이 부분이 추후에 로직에서 제대로 출력이 안돼. 알려줘
       : login?.loginMethod === 'KAKAO'
         ? login.profile
         : `/display/${login.profile}`;
-
-  const isLoggedIn = Boolean(login?.id);
 
   return (
     <nav id='navbar'>
@@ -27,7 +26,7 @@ const Navbar = ({ login }) => {
       {/* 프로필 이미지 */}
       <img src={profileImg} alt='프사' className='profile-img' />
       <span className='navbar-text'>
-        &nbsp;&nbsp;Welcome {login?.nickName || ''}
+        &nbsp;&nbsp;Welcome {login?.nickName ? login?.nickName : '방문자님'}
       </span>
 
       {/* 모바일 토글 버튼 */}
@@ -73,15 +72,3 @@ const Navbar = ({ login }) => {
     </nav>
   );
 };
-
-// PropTypes로 props 타입 정의
-Navbar.propTypes = {
-  login: PropTypes.shape({
-    id: PropTypes.string,
-    profile: PropTypes.string,
-    loginMethod: PropTypes.string,
-    nickName: PropTypes.string,
-  }),
-};
-
-export default Navbar;

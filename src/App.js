@@ -1,10 +1,14 @@
-import SignUp from './pages/SignUp';
-
+import { AuthContextProvider } from './context/UserContext';
+import { Header } from './pages/Header';
+import AppRouter from './router/AppRouter';
 function App() {
   return (
-    <div>
-      <SignUp />
-    </div>
+    <AuthContextProvider>
+      <div className='App'>
+        <Header />
+        <AppRouter />
+      </div>
+    </AuthContextProvider>
   );
 }
 
