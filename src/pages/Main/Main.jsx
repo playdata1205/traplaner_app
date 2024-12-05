@@ -10,26 +10,26 @@ const MainPage = () => {
   const [carouselData, setCarouselData] = useState([]); // 캐러셀 데이터
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const cardsPerPage = 2;
+  const [currentIndex, setCurrentIndex] = useState(0); // 현재 캐러셀 인덱스 추가
 
   // 여행 리스트 및 캐러셀 데이터를 가져오는 함수
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // 캐러셀 데이터 가져오기
+        const carouselResponse = await axios.get(
+          `${API_BASE_URL}${MAIN}/top3-favorite`,
+        );
+        console.log(carouselResponse.data.result);
+        setCarouselData(carouselResponse.data.result);
         if (isLoggedIn) {
           // 여행 리스트 데이터 가져오기
           const travelResponse = await axios.get(
-            `${API_BASE_URL}${MAIN}/travelboard/list`,
+            `${API_BASE_URL}${MAIN}/mytravel-list`,
           );
-          setTravelList(travelResponse.data);
-
-          // 캐러셀 데이터 가져오기
-          const carouselResponse = await axios.get(
-            `${API_BASE_URL}${MAIN}/carousel`,
-          );
-          setCarouselData(carouselResponse.data);
+          setTravelList(travelResponse.data.content);
         } else {
           setTravelList([]);
-          setCarouselData([]);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -38,6 +38,18 @@ const MainPage = () => {
 
     fetchData();
   }, [isLoggedIn]);
+
+  // 자동 슬라이드를 위한 useEffect 추가
+  useEffect(() => {
+    const autoSlideInterval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === carouselData.length - 1 ? 0 : prevIndex + 1,
+      );
+    }, 5000); // 5초마다 실행
+
+    // 컴포넌트가 언마운트되면 인터벌 정리
+    return () => clearInterval(autoSlideInterval);
+  }, [carouselData.length]); // carouselData.length가 변경될 때마다 인터벌 재설정
 
   // 여행 카드를 페이지네이션으로 표시
   const displayCards = () => {
@@ -83,21 +95,34 @@ const MainPage = () => {
     ));
   };
 
+  // 캐러셀 제어 함수 추가
+  const handlePrevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? carouselData.length - 1 : prevIndex - 1,
+    );
+  };
+
+  const handleNextSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === carouselData.length - 1 ? 0 : prevIndex + 1,
+    );
+  };
+
   return (
     <div className='container mt-5'>
-      {/* 추천 여행지 슬라이드 */}
-      <div id='demo' className='carousel slide' data-bs-ride='carousel'>
+      {/* 추천 여행지 슬라이드 수정 */}
+      <div id='demo' className='carousel slide'>
         <div className='carousel-inner'>
           {carouselData.map((travel, index) => (
             <div
               key={travel.id}
-              className={`carousel-item ${index === 0 ? 'active' : ''}`}
+              className={`carousel-item ${index === currentIndex ? 'active' : ''}`}
             >
               <a href={`/travelboard/info/${travel.id}`}>
                 <img
-                  src={`/assets/img/${travel.travelImg}`}
+                  src={`https://traplaner-images.s3.ap-northeast-2.amazonaws.com/${travel.travelImg}`}
                   className='d-block w-100'
-                  alt={travel.travelTitle}
+                  alt={travel.title}
                 />
               </a>
             </div>
@@ -106,16 +131,14 @@ const MainPage = () => {
         <button
           className='carousel-control-prev'
           type='button'
-          data-bs-target='#demo'
-          data-bs-slide='prev'
+          onClick={handlePrevSlide}
         >
           <span className='carousel-control-prev-icon'></span>
         </button>
         <button
           className='carousel-control-next'
           type='button'
-          data-bs-target='#demo'
-          data-bs-slide='next'
+          onClick={handleNextSlide}
         >
           <span className='carousel-control-next-icon'></span>
         </button>
