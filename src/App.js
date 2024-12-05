@@ -1,5 +1,5 @@
 import { AuthContextProvider } from './context/UserContext';
-import { Header } from './pages/Header';
+import { Header } from './pages/Layout/Header';
 import AppRouter from './router/AppRouter';
 function App() {
   return (

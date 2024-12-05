@@ -8,13 +8,14 @@
 #navbar {
   width: 100%;
   background-color: #ffffff;
-  position: fixed;
+  position: sticky;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.5em 1em;
   border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
 }
 
 /* 로고 및 브랜드 스타일 */
@@ -23,6 +24,10 @@
   font-weight: bold;
   color: #333;
   text-decoration: none;
+  width: 60px;
+}
+#navbar .logo {
+  height: 45px;
 }
 
 /* 프로필 이미지 스타일 */
@@ -44,6 +49,8 @@
   display: flex;
   gap: 1em;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 #navbar-menu .nav-item {
@@ -58,7 +65,7 @@
 }
 
 #navbar-menu .nav-link:hover {
-  color: #007bff;
+  color:#34b352; 
 }
 
 /* 모바일 메뉴 토글 버튼 */

@@ -1,33 +1,37 @@
 import React, { useContext, useState } from 'react';
-import '../styles/header.css';
-import { login } from '../context/UserContext';
-
+import { login } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
+import '../../styles/header.css';
 export const Header = () => {
-  const { isLoggedIn, onLogout, profile } = useContext(login);
+  const { isLoggedIn, onLogout, profile, nickName, loginMethod } =
+    useContext(login);
   const [menuOpen, setMenuOpen] = useState(false);
-
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
   };
 
-  const profileImg =
-    login?.profile === undefined
-      ? '/img/anonymous.jpg' // 이 부분이 추후에 로직에서 제대로 출력이 안돼. 알려줘
-      : login?.loginMethod === 'KAKAO'
-        ? login.profile
-        : `/display/${login.profile}`;
+  const profileImg = loginMethod === 'KAKAO' ? `/display/${profile}` : profile;
+  console.log(profileImg);
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    onLogout();
+    alert('로그아웃 완료!');
+    navigate('/');
+  };
 
   return (
     <nav id='navbar'>
       <a href='/' className='brand'>
-        TRAPLAN
+        <img src='/assets/img/logo.png' className='logo' alt='logo' />
       </a>
-
-      {/* 프로필 이미지 */}
-      <img src={profileImg} alt='프사' className='profile-img' />
-      <span className='navbar-text'>
-        &nbsp;&nbsp;Welcome {login?.nickName ? login?.nickName : '방문자님'}
-      </span>
+      {isLoggedIn && (
+        <>
+          {/* 프로필 이미지 */}
+          <img src={profileImg} alt='프사' className='profile-img' />
+          <span className='navbar-text'>&nbsp;&nbsp;Welcome {nickName}</span>
+        </>
+      )}
 
       {/* 모바일 토글 버튼 */}
       <button id='navbar-toggle' onClick={toggleMenu}>
@@ -49,9 +53,9 @@ export const Header = () => {
               </a>
             </li>
             <li className='nav-item'>
-              <a href='/members/sign-out' className='nav-link'>
+              <p onClick={handleLogout} className='nav-link'>
                 로그아웃
-              </a>
+              </p>
             </li>
           </>
         ) : (
