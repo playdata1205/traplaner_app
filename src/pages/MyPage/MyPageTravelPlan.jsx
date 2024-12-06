@@ -1,24 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { login } from '../../context/UserContext';
+import { get } from 'lodash';
+import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
+import axios from 'axios';
 
 const MyTravelPage = () => {
-  const [travels, setTravels] = useState([]);
+  const { nickName, profile } = useContext(login);
   const [pagination, setPagination] = useState({});
-  const [message, setMessage] = useState('');
-  const [searchOption, setSearchOption] = useState('pastOrder');
 
+  const [searchOption, setSearchOption] = useState('pastOrder');
+  const [travels, setTravels] = useState([]);
   useEffect(() => {
     fetchTravels();
-    if (message) alert(message);
-  }, [message]);
+  }, []);
 
   const fetchTravels = async (pageNo = 1, amount = 10) => {
     try {
-      const response = await fetch(
-        `/my-page/mytravel?pageNo=${pageNo}&amount=${amount}&searchOption=${searchOption}`,
+      const response = await axios.get(
+        `${API_BASE_URL}${MYPAGE}/my-page/my-travel`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
+          },
+        },
       );
-      const data = await response.json();
-      setTravels(data.travels);
-      setPagination(data.pagination);
+      console.log(response);
+
+      const responseData = response.data;
+      console.log(await responseData);
+
+      // setPagination(responseData.pagination);
+      setTravels(responseData);
+
+      console.log(travels);
     } catch (error) {
       console.error('Error fetching travel data:', error);
     }
@@ -81,7 +95,7 @@ const MyTravelPage = () => {
             >
               나의 여행
             </a>
-            <a href={`/my-page/${login.id}`}>여행일정</a>
+            <a href={`/my-page`}>여행일정</a>
             <a href={`/my-page/favorite/${login.id}`}>좋아요한 게시물</a>
           </div>
         </div>
@@ -100,7 +114,7 @@ const MyTravelPage = () => {
                 <tr>
                   <th>번호</th>
                   <th>게시글 제목</th>
-                  <th>여행일</th>
+                  <th>여행기간</th>
                   <th>공유여부</th>
                 </tr>
               </thead>
@@ -135,7 +149,7 @@ const MyTravelPage = () => {
                 ))}
               </tbody>
             </table>
-            <div className='pagination'>
+            {/* <div className='pagination'>
               {pagination.prev && (
                 <button onClick={() => fetchTravels(pagination.begin - 1)}>
                   이전
@@ -154,7 +168,7 @@ const MyTravelPage = () => {
                   다음
                 </button>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

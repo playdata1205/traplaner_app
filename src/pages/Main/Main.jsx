@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { login } from '../../context/UserContext';
 import { API_BASE_URL, MAIN } from '../../configs/host-config';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const MainPage = () => {
   const { isLoggedIn } = useContext(login); // 로그인 상태
