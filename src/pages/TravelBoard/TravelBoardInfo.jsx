@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-
-const TravelDetail = ({ travelData, userLogin }) => {
+import React, { useState, useEffect, useContext } from 'react';
+import { login } from '../../context/UserContext';
+const TravelDetail = ({ travelData }) => {
+  const { isLoggedIn } = useContext(login);
   const [likeCount, setLikeCount] = useState(travelData.likeCount);
   const [isLiked, setIsLiked] = useState(travelData.likeFlag);
   const [journey, setJourney] = useState(travelData.journey);
 
   // 좋아요 버튼 토글 핸들러
   const toggleLike = async () => {
-    if (!userLogin) {
+    if (!isLoggedIn) {
       alert('로그인 하지 않은 사용자는 좋아요를 할 수 없습니다.');
       return;
     }
