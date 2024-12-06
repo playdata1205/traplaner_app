@@ -3,10 +3,12 @@ import { login } from '../../context/UserContext';
 import { get } from 'lodash';
 import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
 import axios from 'axios';
+import '../../styles/myPageTravelPlan.css';
 
 const MyTravelPage = () => {
   const { nickName, profile } = useContext(login);
   const [pagination, setPagination] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   const [searchOption, setSearchOption] = useState('pastOrder');
   const [travels, setTravels] = useState([]);
@@ -15,6 +17,7 @@ const MyTravelPage = () => {
   }, []);
 
   const fetchTravels = async (pageNo = 1, amount = 10) => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         `${API_BASE_URL}${MYPAGE}/my-page/my-travel`,
@@ -35,6 +38,8 @@ const MyTravelPage = () => {
       console.log(travels);
     } catch (error) {
       console.error('Error fetching travel data:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -112,36 +117,36 @@ const MyTravelPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>번호</th>
-                  <th>게시글 제목</th>
-                  <th>여행기간</th>
-                  <th>공유여부</th>
+                  <th style={{ width: '10%', padding: '12px' }}>번호</th>
+                  <th style={{ width: '40%', padding: '12px' }}>게시글 제목</th>
+                  <th style={{ width: '30%', padding: '12px' }}>여행기간</th>
+                  <th style={{ width: '20%', padding: '12px' }}>공유여부</th>
                 </tr>
               </thead>
               <tbody>
                 {travels.map((travel) => (
                   <tr key={travel.id}>
-                    <td>{travel.id}</td>
-                    <td>
+                    <td style={{ padding: '10px' }}>{travel.id}</td>
+                    <td style={{ padding: '10px' }}>
                       <a href={`/my-page/board-info/${travel.id}`}>
                         {travel.title}
                       </a>
                     </td>
-                    <td>
+                    <td style={{ padding: '10px' }}>
                       {travel.startDate} ~ {travel.endDate}
                     </td>
-                    <td>
+                    <td style={{ padding: '10px' }}>
                       <input
                         type='checkbox'
                         checked={travel.share === 'true'}
                         onChange={() => toggleShare(travel.id)}
                       />
                     </td>
-                    <td>
+                    <td style={{ padding: '10px' }}>
                       <img
                         src='/assets/img/delete.png'
                         alt='삭제'
-                        style={{ width: 20 }}
+                        style={{ width: 20, cursor: 'pointer' }}
                         onClick={() => deleteTravel(travel.id, login.id)}
                       />
                     </td>
