@@ -17,12 +17,16 @@ const AppRouter = () => {
       <Route path='/members/pw-change' element={<PasswordChangePage />}></Route>
       <Route path='/travelboard/list' element={<TravelBoard />}></Route>
       <Route path='/travelboard/info' element={<TravelDetail />}></Route>
-      {/* <Route
+      {/* <Route path='/travelplan' element={<TravelPlan />}></Route> */}
+      <Route
         path='/travelplan'
-        element={<PrivateRouter element={<TravelPlan />} />}
-      ></Route> */}
+        element={
+          <PrivateRouter>
+            <TravelPlan />
+          </PrivateRouter>
+        }
+      ></Route>
       {/* 
-      <Route path='/travelplan' element={<TravelPlan />}></Route>
       <Route path='/my-page' element={<MyPage />}></Route>
       <Route path='/mypage/account' element={< />}></Route>
       <Route path='/mypage/travelboard' element={< />}></Route>

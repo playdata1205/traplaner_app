@@ -1,0 +1,284 @@
+.section-title {
+  color: #016118;
+  font-weight: 600;
+  position: relative;
+  padding-left: 15px;
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 20px;
+  background-color: #f04136;
+  border-radius: 3px;
+}
+
+.highlight {
+  color: #f04136;
+  font-weight: 700;
+}
+
+/* 캐러셀 스타일링 */
+.custom-carousel {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.carousel-caption {
+  background: linear-gradient(
+    to bottom,
+    rgba(1, 97, 24, 0.6) 0%,
+    transparent 50%,
+    rgba(1, 97, 24, 0.6) 100%
+  );
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+}
+
+.travel-title-top {
+  color: white;
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.travel-title {
+  color: white;
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.custom-carousel-button {
+  background-color: rgba(240, 65, 54, 0.7);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 카드 컨테이너 스타일링 */
+#card-container {
+  gap: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+}
+
+/* 로그인 상태일 때의 카드 컨테이너 스타일링 */
+#card-container.logged-in {
+  justify-content: center;
+}
+
+/* 여행 카드 스타일링 개선 */
+.travel-card {
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  background: white;
+  height: 100%;
+  border: none !important;
+  max-width: 280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.travel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(1, 97, 24, 0.1) !important;
+}
+
+.card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  height: 140px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.travel-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* 일반 카드 스타일링 */
+.card {
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  height: 100%;
+  background: white;
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(1, 97, 24, 0.1);
+}
+
+.card .card-img-top {
+  height: 140px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.card .pt-2 {
+  padding: 0.3rem !important;
+}
+
+.card-title {
+  color: #016118;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+/* 새로운 여행 계획하기 카드 스타일링 */
+.add-travel-link {
+  text-decoration: none;
+  height: 100%;
+  display: block;
+}
+
+.add-travel-link .card-img-wrapper {
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.add-travel-link:hover .card-img-wrapper {
+  background-color: #e9ecef;
+}
+
+.add-travel-link .card-body {
+  padding: 1rem;
+  text-align: center;
+}
+
+/* 이미지 없음 스타일링 */
+.no-image-container {
+  background-color: #f8f9fa;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  color: #6c757d;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.no-image-container:hover {
+  background-color: #e9ecef;
+}
+
+/* 페이지네이션 스타일링 */
+.custom-pagination .page-link {
+  color: #016118;
+  border: none;
+  margin: 0 5px;
+  border-radius: 5px;
+  padding: 0.3rem 0.6rem;
+}
+
+.custom-pagination .page-item.active .page-link {
+  background-color: #f04136;
+  border-color: #f04136;
+}
+
+.custom-pagination .page-link:hover {
+  background-color: rgba(240, 65, 54, 0.1);
+  color: #f04136;
+}
+
+/* 컨테이너 대 너비 설정 */
+.custom-container {
+  max-width: 1200px !important;
+  margin: 0 auto;
+  padding: 15px 30px;
+  min-height: 92vh;
+  overflow: visible;
+}
+
+/* 그리드 조정 */
+@media (min-width: 768px) {
+  .row-cols-md-3 > * {
+    flex: 0 0 auto;
+    width: calc(33.333% - 1.5rem);
+    margin: 0.75rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 992px) {
+  .row-cols-md-3 > * {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+}
+
+/* 카드 최대 너비 축가 */
+.card,
+.travel-card {
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 추천 여행지 섹션 */
+.recommended-section {
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+/* 여행 리스트 섹션 */
+.travel-list-section {
+  height: auto;
+  margin-top: 1.5rem;
+  overflow: visible;
+  padding: 0 0.5rem;
+}
+
+/* 캐러셀 이미지 높이 조정 */
+.custom-carousel img {
+  height: 380px;
+  object-fit: cover;
+}
+
+/* 여행 카드 이미지 높이 조정 */
+.card-img-top {
+  height: 140px;
+  object-fit: cover;
+}
