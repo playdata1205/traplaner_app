@@ -5,9 +5,10 @@
 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL, MEMBER } from './host-config';
 
 // Axios 인스턴스 생성
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
@@ -69,10 +70,9 @@ axiosInstance.interceptors.response.use(
         const id = localStorage.getItem('USER_ID');
         console.log(id);
 
-        const res = await axios.post(
-          `${process.env.REACT_APP_API_BASE_URL}/user/refresh`,
-          { id },
-        );
+        const res = await axios.post(`${API_BASE_URL}${MEMBER}/refresh`, {
+          id,
+        });
 
         const token = res.data.result.token; // axios는 json() 안씁니다.
         localStorage.setItem('ACCESS_TOKEN', token); // 동일한 이름으로 토큰 담기 (덮어씀)

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/TravelBoard.css'; // 스타일을 별도의 CSS 파일로 관리합니다.
 
 const TravelBoard = ({ tbList, paginationInfo, searchOptions }) => {
   const [searchType, setSearchType] = useState(searchOptions.type || 'title');

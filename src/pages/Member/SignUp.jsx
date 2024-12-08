@@ -154,11 +154,18 @@ function SignUpForm() {
   };
 
   return (
-    <div className='container'>
-      <h1>회원가입</h1>
-      <form onSubmit={handleSubmit} encType='multipart/form-data'>
-        <div className='profile'>
-          <div className='thumbnail-box'>
+    <div className='signup-container'>
+      <h1 className='signup-title'>회원가입</h1>
+      <form
+        onSubmit={handleSubmit}
+        encType='multipart/form-data'
+        className='signup-form'
+      >
+        <div className='signup-profile'>
+          <div
+            className='signup-profile__thumbnail'
+            onClick={() => document.getElementById('profile-img').click()}
+          >
             <img
               src={
                 formData.profileImage
@@ -168,7 +175,9 @@ function SignUpForm() {
               alt='프로필 썸네일'
             />
           </div>
-          <label htmlFor='profile-img'>프로필 이미지 추가</label>
+          <label htmlFor='profile-img' className='signup-profile__label'>
+            프로필 이미지 추가
+          </label>
           <input
             type='file'
             id='profile-img'
@@ -178,7 +187,7 @@ function SignUpForm() {
           />
         </div>
 
-        <div className='input-box'>
+        <div className='signup-input__wrapper'>
           <input
             type='email'
             name='email'
@@ -186,11 +195,12 @@ function SignUpForm() {
             value={formData.email}
             onChange={handleChange}
             onBlur={handleBlur}
+            className='signup-input'
           />
-          <span>{errors.email}</span>
+          <span className='signup-error'>{errors.email}</span>
         </div>
 
-        <div className='input-box'>
+        <div className='signup-input__wrapper'>
           <input
             type='password'
             name='password'
@@ -198,11 +208,12 @@ function SignUpForm() {
             value={formData.password}
             onChange={handleChange}
             onBlur={handleBlur}
+            className='signup-input'
           />
-          <span>{errors.password}</span>
+          <span className='signup-error'>{errors.password}</span>
         </div>
 
-        <div className='input-box'>
+        <div className='signup-input__wrapper'>
           <input
             type='password'
             name='passwordCheck'
@@ -210,11 +221,12 @@ function SignUpForm() {
             value={formData.passwordCheck}
             onChange={handleChange}
             onBlur={handleBlur}
+            className='signup-input'
           />
-          <span>{errors.passwordCheck}</span>
+          <span className='signup-error'>{errors.passwordCheck}</span>
         </div>
 
-        <div className='input-box'>
+        <div className='signup-input__wrapper'>
           <input
             type='text'
             name='nickName'
@@ -222,11 +234,12 @@ function SignUpForm() {
             value={formData.nickName}
             onChange={handleChange}
             onBlur={handleBlur}
+            className='signup-input'
           />
-          <span>{errors.nickName}</span>
+          <span className='signup-error'>{errors.nickName}</span>
         </div>
 
-        <button type='submit' id='joinbtn'>
+        <button type='submit' className='signup-submit'>
           회원가입
         </button>
       </form>
