@@ -6,6 +6,7 @@ import axios from 'axios';
 import '../../styles/myPageTravelPlan.css';
 import moment from 'moment';
 import { Link, useLocation } from 'react-router-dom';
+import axiosInstance from '../../configs/axios-config';
 
 const MyTravelPage = () => {
   const { nickName, profile } = useContext(login);
@@ -21,7 +22,7 @@ const MyTravelPage = () => {
   const fetchTravels = async (pageNo, amount) => {
     setIsLoading(true);
     try {
-      const response = await axios.get(
+      const response = await axiosInstance.get(
         `${API_BASE_URL}${MYPAGE}/my-page/my-travel?page=pageNo&size=amount`,
         {
           headers: {
@@ -55,7 +56,7 @@ const MyTravelPage = () => {
   const toggleShare = async (id) => {
     try {
       const data = null; // axios post 전송은 전달할 데이터 없어도 null이라도 전달 해야함.
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${API_BASE_URL}${MYPAGE}/my-page/shareIs/${id}`,
         data,
         {
@@ -81,7 +82,7 @@ const MyTravelPage = () => {
 
     try {
       const data = null; // axios post 전송은 전달할 데이터 없어도 null이라도 전달 해야함.
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${API_BASE_URL}${MYPAGE}/my-page/delete/${boardId}`,
         data,
         {
@@ -150,9 +151,10 @@ const MyTravelPage = () => {
               <thead>
                 <tr>
                   <th style={{ width: '10%', padding: '12px' }}>번호</th>
-                  <th style={{ width: '40%', padding: '12px' }}>게시글 제목</th>
+                  <th style={{ width: '35%', padding: '12px' }}>게시글 제목</th>
                   <th style={{ width: '30%', padding: '12px' }}>여행기간</th>
-                  <th style={{ width: '20%', padding: '12px' }}>공유여부</th>
+                  <th style={{ width: '15%', padding: '12px' }}>공유여부</th>
+                  <th style={{ width: '10%', padding: '12px' }}>삭제</th>
                 </tr>
               </thead>
               <tbody>
@@ -178,11 +180,15 @@ const MyTravelPage = () => {
                         onChange={() => toggleShare(travel.id)}
                       />
                     </td>
-                    <td style={{ padding: '10px' }}>
+                    <td style={{ padding: '10px', textAlign: 'center' }}>
                       <img
                         src='/assets/img/delete.png'
                         alt='삭제'
-                        style={{ width: 20, cursor: 'pointer' }}
+                        style={{
+                          width: 20,
+                          cursor: 'pointer',
+                          verticalAlign: 'middle',
+                        }}
                         onClick={() => deleteTravel(travel.id)}
                       />
                     </td>

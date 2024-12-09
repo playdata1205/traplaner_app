@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import '../../styles/MyTravelBoardInfo.css';
+import axiosInstance from '../../configs/axios-config';
 
 const TravelBoardInfo = () => {
   const [travel, setTravel] = useState({});
@@ -27,7 +28,7 @@ const TravelBoardInfo = () => {
   const fetchData = async (travelId) => {
     console.log(localStorage.getItem('ACCESS_TOKEN'));
 
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       `${API_BASE_URL}${MYPAGE}/my-page/board-info/${travelId}`,
       {
         headers: {
@@ -113,7 +114,7 @@ const TravelBoardInfo = () => {
       console.log(Object.keys(journeyImg).length);
     }
 
-    const response = await axios.post(
+    const response = await axiosInstance.post(
       `${API_BASE_URL}${MYPAGE}/my-page/insert-board`,
       data,
       {

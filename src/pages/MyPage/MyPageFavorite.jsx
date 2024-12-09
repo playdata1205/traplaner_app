@@ -5,6 +5,7 @@ import axios from 'axios';
 import login from '../../context/UserContext';
 import moment from 'moment';
 import '../../styles/MyPageFavorite.css';
+import axiosInstance from '../../configs/axios-config';
 
 const MyPageFavorite = () => {
   const { nickName, profile } = useContext(login);
@@ -22,7 +23,7 @@ const MyPageFavorite = () => {
   }, []);
 
   const fetchFavorite = async (pageNo, amount) => {
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       `${API_BASE_URL}${MYPAGE}/my-page/favorite?page=pageNo&size=amount`,
       {
         headers: {

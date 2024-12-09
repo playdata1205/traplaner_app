@@ -120,52 +120,59 @@ const TravelBoardDetail = () => {
   const generateMapUrl = () => {
     if (!journey || journey.length === 0) return null;
 
+    // 장소가 하나일 경우
     if (journey.length === 1) {
-      return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&q=place_id:${journey[0].locationPin}`;
+      const location = encodeURIComponent(
+        journey[0].accommodationName || journey[0].journeyName,
+      );
+      return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&q=${location}`;
     }
 
-    const origin = `place_id:${journey[0].locationPin}`;
-    const destination = `place_id:${journey[journey.length - 1].locationPin}`;
-    const waypoints = journey
-      .slice(1, -1)
-      .map((j) => `place_id:${j.locationPin}`)
-      .join('|');
+    // 여러 장소가 있는 경우
+    const locations = journey.map((j) =>
+      encodeURIComponent(j.accommodationName || j.journeyName),
+    );
+    const origin = locations[0];
+    const destination = locations[locations.length - 1];
+    const waypoints = locations.slice(1, -1).join('|');
 
-    return `https://www.google.com/maps/embed/v1/directions?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&origin=${origin}&destination=${destination}${
-      waypoints ? `&waypoints=${waypoints}` : ''
-    }`;
+    return `https://www.google.com/maps/embed/v1/directions?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I
+      &origin=${origin}
+      &destination=${destination}
+      ${waypoints ? `&waypoints=${waypoints}` : ''}
+      &mode=driving`.replace(/\s+/g, '');
   };
 
   return isLoading ? (
     <div>Loading...</div>
   ) : (
-    <div className='travel-board'>
-      <h1 className='travel-board__title'>{travelData.title}</h1>
-      <div className='travel-board__meta'>
+    <div className='tb-container'>
+      <h1 className='tb-title'>{travelData.title}</h1>
+      <div className='tb-meta'>
         {travelData.writer} {travelData.writeDate}
-        <span className='travel-board__like'>
-          <button className='travel-board__like-button' onClick={toggleLike}>
+        <span className='tb-like-wrapper'>
+          <button className='tb-like-btn' onClick={toggleLike}>
             <FontAwesomeIcon
-              className={`travel-board__like-icon ${isLiked ? 'travel-board__like-icon--active' : ''}`}
+              className={`tb-like-icon ${isLiked ? 'tb-like-icon--active' : ''}`}
               icon={faHeart}
             />
-            <span className='travel-board__like-count'>{likeCount}</span>
+            <span className='tb-like-count'>{likeCount}</span>
           </button>
         </span>
       </div>
-      <div className='travel-board__section'>
+      <div className='tb-section'>
         <img
-          className='travel-board__image'
+          className='tb-image'
           src={`/display/${travelData.img}`}
           alt='Travel'
           style={{ width: '700px', height: '500px' }}
         />
       </div>
-      <div className='travel-board__section'>{travelData.content}</div>
+      <div className='tb-section'>{travelData.content}</div>
 
       {journey.length > 0 && (
         <iframe
-          className='travel-board__map'
+          className='tb-map'
           height='450'
           src={generateMapUrl()}
           allowFullScreen
@@ -173,21 +180,15 @@ const TravelBoardDetail = () => {
       )}
 
       {Object.entries(groupedJourneys).map(([day, dayJourneys]) => (
-        <div key={day} className='travel-board__day'>
-          <h1 className='travel-board__title'>DAY {day}</h1>
+        <div key={day} className='tb-day-container'>
+          <h1 className='tb-title'>DAY {day}</h1>
           {dayJourneys.map((journey, index) => (
-            <div key={index} className='travel-board__journey'>
-              <h4 className='travel-board__journey-time'>
-                {journey.startTime}
-              </h4>
-              <div className='travel-board__section'>
-                <img
-                  className='travel-board__image'
-                  src={`/display/${journey.journeyImg}`}
-                  alt='Journey'
-                />
+            <div key={index} className='tb-journey-item'>
+              <h4 className='tb-title'>{journey.startTime}</h4>
+              <div className='tb-section'>
+                <img src={`/display/${journey.journeyImg}`} alt='Journey' />
               </div>
-              <div className='travel-board__section'>
+              <div className='tb-section'>
                 {journey.accommodationName} {journey.journeyName}
               </div>
             </div>
