@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c2b42fea-0f23-4c04-94e0-0c0925507fa2" name="변경" comment="mypage 임시 커밋">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/Main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Member/SignIn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Member/SignIn.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPagePwChange.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPagePwChange.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/TravelBoard/TravelBoardInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TravelBoard/TravelBoardInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/AppRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/AppRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/TravelBoardInfo.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/TravelBoardInfo.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

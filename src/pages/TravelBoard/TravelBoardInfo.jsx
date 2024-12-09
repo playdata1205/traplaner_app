@@ -139,55 +139,60 @@ const TravelBoardDetail = () => {
   return isLoading ? (
     <div>Loading...</div>
   ) : (
-    <div className='container'>
-      <h1>{travelData.title}</h1>
-      <div className='author-date'>
+    <div className='traplan-board-detail'>
+      <h1 className='traplan-board-detail__title'>{travelData.title}</h1>
+      <div className='traplan-board-detail__metadata'>
         {travelData.writer} {travelData.writeDate}
-        <span className='heart'>
-          <button id='like-button' onClick={toggleLike}>
+        <span className='traplan-board-detail__heart-container'>
+          <button
+            className='traplan-board-detail__like-button'
+            onClick={toggleLike}
+          >
             <FontAwesomeIcon
-              id='like-icon'
-              className={isLiked ? 'liked' : ''}
+              className={`traplan-board-detail__like-icon ${isLiked ? 'traplan-board-detail__like-icon--active' : ''}`}
               icon={faHeart}
             />
-            <span id='like-count'>{likeCount}</span>
+            <span className='traplan-board-detail__like-count'>
+              {likeCount}
+            </span>
           </button>
         </span>
       </div>
-      <div className='section photo'>
+      <div className='traplan-board-detail__content-section traplan-board-detail__image-wrapper'>
         <img
-          src={`/display/${travelData.img}`}
+          src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${travelData.travelImg}`}
           alt='Travel'
           style={{ width: '700px', height: '500px' }}
         />
       </div>
-      <div className='section text' id='content'>
+      <div className='traplan-board-detail__content-section traplan-board-detail__text-content'>
         {travelData.content}
       </div>
 
       {journey.length > 0 && (
         <iframe
-          className='map-top'
+          className='traplan-board-detail__map-container'
           height='450'
-          src={
-            journey.length === 1
-              ? `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=place_id:${journey[0].locationPin}`
-              : generateMapUrl(journey)
-          }
+          src={generateMapUrl()}
           allowFullScreen
         ></iframe>
       )}
 
       {Object.entries(groupedJourneys).map(([day, dayJourneys]) => (
-        <div key={day} className='day-group'>
-          <h1 className='day'>DAY {day}</h1>
+        <div key={day} className='traplan-board-detail__day-section'>
+          <h1 className='traplan-board-detail__title'>DAY {day}</h1>
           {dayJourneys.map((journey, index) => (
-            <div key={index} className='journey-item'>
-              <h4 className='day-date'>{journey.startTime}</h4>
-              <div className='section photo'>
-                <img src={`/display/${journey.journeyImg}`} alt='Journey' />
+            <div key={index} className='traplan-board-detail__journey-item'>
+              <h4 className='traplan-board-detail__metadata'>
+                {journey.startTime}
+              </h4>
+              <div className='traplan-board-detail__content-section traplan-board-detail__image-wrapper'>
+                <img
+                  src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${journey.journeyImg}`}
+                  alt='Journey'
+                />
               </div>
-              <div className='section schedule'>
+              <div className='traplan-board-detail__content-section'>
                 {journey.accommodationName} {journey.journeyName}
               </div>
             </div>
