@@ -186,10 +186,10 @@ const TravelBoardDetail = () => {
             <div key={index} className='tb-journey-item'>
               <h4 className='tb-title'>{journey.startTime}</h4>
               <div className='tb-section'>
-                <img src={`/display/${journey.journeyImg}`} alt='Journey' />
+                {journey.accommodationName} {journey.journeyName}
               </div>
               <div className='tb-section'>
-                {journey.accommodationName} {journey.journeyName}
+                <img src={`/display/${journey.journeyImg}`} alt='Journey' />
               </div>
             </div>
           ))}
