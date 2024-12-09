@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
 import login from '../../context/UserContext';
 import '../../styles/MyPageTravelBoard.css';
+import axiosInstance from '../../configs/axios-config';
 
 function MyPageTravelBoard() {
   const { nickName, profile } = useContext(login);
@@ -26,7 +27,7 @@ function MyPageTravelBoard() {
   }, []);
 
   const fetchData = async (pageNo) => {
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       `${API_BASE_URL}${MYPAGE}/my-page/mytravelboard?page=${pageNo}`,
       {
         headers: {

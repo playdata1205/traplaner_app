@@ -112,7 +112,6 @@
   color: #999;
 }
 
-/* 반응형 디자인 */
 @media (max-width: 480px) {
   .pw-change {
     margin: 20px;
