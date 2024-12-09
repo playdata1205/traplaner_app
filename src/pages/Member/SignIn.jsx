@@ -41,7 +41,6 @@ const SignIn = () => {
       const profile = res.data.result.profile;
 
       onLogin(token, id, nickName, loginMethod, profile);
-      navigate('/');
     } catch (e) {
       console.log(e);
       // 옵셔널 체이닝 (optional chaining)
@@ -96,6 +95,9 @@ const SignIn = () => {
           비밀번호 변경
         </a>
       </div>
+      <div style={styles.divider}>
+        <span style={styles.dividerText}>또는</span>
+      </div>
       <div style={styles.snsLogo}>
         <a href='../kakao/login'>
           <img
@@ -116,61 +118,140 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '90vh',
+    padding: '15px',
   },
   logo: {
-    width: '25%',
+    width: '250px',
+    marginBottom: '15px',
+    transition: 'transform 0.3s ease',
+    '&:hover': {
+      transform: 'scale(1.05)',
+    },
   },
   title: {
     textAlign: 'center',
+    margin: '0 0 25px 0',
+    color: '#016118',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    lineHeight: '1.3',
+    textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
   },
   form: {
     display: 'flex',
     alignItems: 'center',
+    padding: '25px',
+    backgroundColor: 'white',
+    borderRadius: '20px',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+    transition: 'transform 0.3s ease',
+    '&:hover': {
+      transform: 'translateY(-5px)',
+    },
   },
   formText: {
-    height: '40%',
     display: 'flex',
     flexDirection: 'column',
+    gap: '12px',
   },
   input: {
-    width: '340px',
-    height: '35px',
-    marginBottom: '5px',
+    width: '280px',
+    height: '42px',
     marginRight: '15px',
-    border: '1px solid #e8e8e8',
-    borderRadius: '5px',
-  },
-  loginBtn: {
-    height: '60px',
-    width: '70px',
-    backgroundColor: 'white',
     border: '2px solid #e8e8e8',
     borderRadius: '10px',
+    padding: '0 15px',
+    fontSize: '14px',
+    transition: 'all 0.3s ease',
+    '&:focus': {
+      borderColor: '#016118',
+      outline: 'none',
+      boxShadow: '0 0 0 3px rgba(1, 97, 24, 0.1)',
+    },
+    '&::placeholder': {
+      color: '#aaa',
+    },
+  },
+  loginBtn: {
+    height: '96px',
+    width: '70px',
+    backgroundColor: '#F04136',
+    border: 'none',
+    borderRadius: '10px',
     cursor: 'pointer',
+    color: 'white',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 6px rgba(240, 65, 54, 0.2)',
+    '&:hover': {
+      backgroundColor: '#d63027',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 6px 8px rgba(240, 65, 54, 0.3)',
+    },
+    '&:active': {
+      transform: 'translateY(1px)',
+    },
   },
   signUpBtn: {
     display: 'flex',
-    width: '225px',
+    width: '240px',
+    height: '38px',
     justifyContent: 'space-between',
-    marginTop: '20px',
-    marginBottom: '20px',
+    marginTop: '25px',
+    marginBottom: '25px',
   },
   link: {
     textDecoration: 'none',
-    backgroundColor: '#e8e8e8',
-    color: 'black',
-    border: '1px solid gray',
+    backgroundColor: '#016118',
+    color: 'white',
+    border: 'none',
     borderRadius: '10px',
-    padding: '10px',
+    padding: '8px 18px',
+    fontSize: '13px',
+    fontWeight: '600',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 6px rgba(1, 97, 24, 0.2)',
+    '&:hover': {
+      backgroundColor: '#014913',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 6px 8px rgba(1, 97, 24, 0.3)',
+    },
+    '&:active': {
+      transform: 'translateY(1px)',
+    },
   },
   snsLogo: {
-    width: '140px',
+    width: '100%',
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    gap: '12px',
+    marginTop: '15px',
   },
   snsBtn: {
-    width: '60px',
+    width: '90px',
+    transition: 'all 0.3s ease',
+    filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))',
+    '&:hover': {
+      transform: 'scale(1.08) translateY(-2px)',
+      filter: 'drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15))',
+    },
+  },
+  divider: {
+    width: '100%',
+    textAlign: 'center',
+    borderBottom: '1px solid #e8e8e8',
+    lineHeight: '0.1em',
+    margin: '15px 0',
+  },
+  dividerText: {
+    background: '#f8f9fa',
+    padding: '0 10px',
+    color: '#666',
+    fontSize: '13px',
   },
 };
 
