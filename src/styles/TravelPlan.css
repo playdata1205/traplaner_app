@@ -1,0 +1,410 @@
+.travel-plan {
+  min-height: calc(100vh - 8vh);
+  margin-top: 2vh;
+}
+
+.travel-plan__container {
+  display: flex;
+  width: 90%;
+  max-width: 1250px;
+  height: 80vh;
+  margin: 2vh auto;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(240, 65, 54, 0.1);
+  background-color: #ffffff;
+}
+
+.travel-plan__info-wrapper {
+  width: 90%;
+  height: 90%;
+}
+
+.travel-plan__info {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.travel-plan__title-section {
+  background: linear-gradient(135deg, #f04136, #ff6b63, #ff8a84, #ffb1ad);
+  padding: 16px;
+  border-radius: 6.4px;
+  margin-bottom: 19.2px;
+}
+
+.travel-plan__title-input {
+  width: 100%;
+  padding: 9.6px 12.8px;
+  border: none;
+  border-radius: 4.8px;
+  font-size: 12.8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.travel-plan__title-input:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(240, 65, 54, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.travel-plan__content-container {
+  flex: 0.4;
+  min-width: 400px;
+  padding: 19.2px;
+  overflow-y: auto;
+}
+
+.travel-plan__period {
+  margin: 19.2px 0;
+  padding: 12.8px;
+  background-color: #f8f8f8;
+  border-radius: 6.4px;
+  border: 1px solid #e8e8e8;
+}
+
+.travel-plan__period-title {
+  color: #016118;
+  font-size: 0.96rem;
+  margin-bottom: 6.4px;
+  display: flex;
+  align-items: center;
+}
+
+.travel-plan__calendar {
+  margin: 12.8px 0;
+  border-radius: 6.4px;
+  overflow: hidden;
+  box-shadow: 0 1.6px 4.8px rgba(0, 0, 0, 0.05);
+}
+
+.travel-plan__map {
+  flex: 0.6;
+  position: sticky;
+  top: 20px;
+  height: calc(100vh - 40px);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.travel-plan__day-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4.8px;
+  font-size: 11.2px;
+  color: #016118;
+}
+
+.travel-plan__form {
+  background-color: #f8f8f8;
+  padding: 16px;
+  border-radius: 6.4px;
+  margin-top: 12.8px;
+  border: 1px solid #e8e8e8;
+}
+
+.travel-plan__form-group {
+  margin-bottom: 12.8px;
+}
+
+.travel-plan__form-group label {
+  display: block;
+  margin-bottom: 6.4px;
+  color: #016118;
+  font-weight: 500;
+  font-size: 11.2px;
+}
+
+.travel-plan__form-group input {
+  width: 100%;
+  padding: 6.4px 9.6px;
+  border: 1px solid #e8e8e8;
+  border-radius: 3.2px;
+  font-size: 11.2px;
+}
+
+.travel-plan__form-group input[type='time'] {
+  width: 45%;
+  margin-right: 5%;
+}
+
+.travel-plan__form-group:has(#location) {
+  margin-bottom: 12.8px;
+}
+
+.travel-plan__form-group:has(#location) .input-button-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6.4px;
+}
+
+.travel-plan__form-group:has(#location) input {
+  flex: 1;
+}
+
+#location-btn {
+  padding: 6.4px 12.8px;
+  background-color: #016118;
+  color: white;
+  border: none;
+  border-radius: 3.2px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  font-size: 11.2px;
+}
+
+#location-btn:hover {
+  background-color: #027820;
+}
+
+.travel-plan__btn {
+  width: 100%;
+  padding: 9.6px;
+  background-color: #016118;
+  color: white;
+  border: none;
+  border-radius: 4.8px;
+  font-size: 12px;
+  margin-top: 12.8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.travel-plan__btn:hover {
+  background-color: #027820;
+}
+
+.travel-plan__save-btn {
+  width: 100%;
+  padding: 9.6px;
+  background-color: #f04136;
+  color: white;
+  border: none;
+  border-radius: 4.8px;
+  font-size: 12px;
+  margin-top: 12.8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.travel-plan__save-btn:hover {
+  background-color: #ff6b63;
+}
+
+.travel-plan__location {
+  margin-right: 10px;
+}
+
+.travel-plan__journey-list {
+  height: 200px;
+  margin-bottom: 8px;
+  overflow: scroll;
+}
+
+.travel-plan__save-journey {
+  background-color: #f8f8f8;
+  margin-top: 8px;
+  padding: 4px;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #e8e8e8;
+}
+
+.travel-plan__icon {
+  color: #f04136;
+  margin-left: 6.4px;
+  transition: transform 0.2s ease;
+  font-size: 0.96rem;
+  cursor: pointer;
+}
+
+.travel-plan__icon:hover {
+  transform: scale(1.1);
+}
+
+.travel-plan__footer {
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.travel-plan__budget {
+  margin-right: 10px;
+}
+
+/* 스크롤 스타일링 */
+.travel-plan__content-container::-webkit-scrollbar {
+  width: 4.8px;
+}
+
+.travel-plan__content-container::-webkit-scrollbar-track {
+  background: #f8f8f8;
+}
+
+.travel-plan__content-container::-webkit-scrollbar-thumb {
+  background: rgba(240, 65, 54, 0.3);
+  border-radius: 2.4px;
+}
+
+.travel-plan__content-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 107, 99, 0.4);
+}
+
+.travel-plan__form-group .budget-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6.4px;
+}
+
+.travel-plan__form-group .budget-wrapper input {
+  flex: 1;
+}
+
+.currency-symbol {
+  color: #016118;
+  font-weight: 500;
+  font-size: 11.2px;
+}
+
+/* FullCalendar 커스텀 스타일 */
+.fc {
+  font-size: 11.2px;
+}
+
+.fc-toolbar-title {
+  color: #016118 !important;
+  font-size: 14px !important;
+}
+
+.fc-button {
+  background-color: #016118 !important;
+  border-color: #016118 !important;
+}
+
+.fc-button:hover {
+  background-color: #027820 !important;
+  border-color: #027820 !important;
+}
+
+.fc-button:disabled {
+  background-color: #016118 !important;
+  border-color: #016118 !important;
+  opacity: 0.65;
+}
+
+.fc-day-today {
+  background-color: rgba(240, 65, 54, 0.1) !important;
+}
+
+.fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  color: #f04136;
+  font-weight: bold;
+}
+
+.fc-daygrid-day-number {
+  color: #016118;
+}
+
+.fc-col-header-cell-cushion {
+  color: #016118;
+  font-weight: 600;
+}
+
+.fc .fc-daygrid-day.fc-day-selected {
+  background-color: rgba(240, 65, 54, 0.2) !important;
+}
+
+.travel-plan__layout {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.travel-plan__form {
+  flex: 1;
+  min-width: 300px;
+}
+
+.travel-plan__map {
+  flex: 1;
+  height: 100%;
+  min-width: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* JourneyView 스타일링 */
+.journey-view {
+  margin-top: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.journey-view__item {
+  padding: 16px;
+  border-bottom: 1px solid #e8e8e8;
+  transition: background-color 0.2s ease;
+}
+
+.journey-view__item:hover {
+  background-color: #f8f8f8;
+}
+
+.journey-view__item:last-child {
+  border-bottom: none;
+}
+
+.journey-view__info {
+  margin: 4px 0;
+  color: #333;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.journey-view__info strong {
+  color: #016118;
+  min-width: 70px;
+  margin-right: 8px;
+}
+
+.journey-view__delete-btn {
+  background-color: #f04136;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s ease;
+}
+
+.journey-view__delete-btn:hover {
+  background-color: #ff6b63;
+}
+
+.journey-view__total-budget {
+  padding: 12px 16px;
+  background-color: #f8f8f8;
+  color: #016118;
+  font-weight: 600;
+  font-size: 14px;
+  border-top: 1px solid #e8e8e8;
+  text-align: right;
+}
+
+.journey-view__empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}

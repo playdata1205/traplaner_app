@@ -28,10 +28,10 @@ const AppRouter = () => {
         path='/travelboard/toggle-like/status/:boardId'
         element={<TravelBoardDetail />}
       ></Route>
-      {/* <Route
+      <Route
         path='/travelplan'
         element={<PrivateRouter element={<TravelPlan />} />}
-      ></Route> */}
+      ></Route>
       {/* 
       <Route path='/travelplan' element={<TravelPlan />}></Route>
       <Route path='/my-page' element={<MyPage />}></Route>
