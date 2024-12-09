@@ -1,0 +1,112 @@
+.pw-change-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pw-change-section {
+  display: flex;
+  justify-content: center;
+}
+
+.pw-change-sidebar {
+  display: inline-block;
+  margin-right: 50px;
+  text-align: center;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 5px;
+  margin-bottom: 50px;
+  height: 700px;
+}
+
+.img_box {
+  height: 50%;
+  width: 50%;
+  background-color: blue;
+}
+
+.pw-change-manage-box {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pw-change-content {
+  width: 800px;
+}
+
+#mypage_h1 {
+  margin-bottom: 100px;
+}
+
+.profile_img {
+  width: 200px;
+  height: 200px;
+}
+
+.pw-change-manage-box a {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.pw-change-info-box {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: 700px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.pw-change-info-box input {
+  width: 70%;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 10px;
+  text-align: center;
+  align-content: center;
+  margin-bottom: 25px;
+  border: 1px solid lightgray;
+}
+
+.pw-change-modify-btn {
+  border: 1px solid lightgray;
+  background-color: white;
+  height: 50px;
+  width: 200px;
+}
+
+.pw-change-nick-check {
+  width: 10%;
+}
+
+#pw-change-new-nickname {
+  width: 60%;
+}
+
+.nickname-container {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+#newNickName {
+  width: 500px;
+  margin-bottom: 0;
+  margin-right: 20px;
+}
+
+.pw-change-nick-check {
+  width: 80px;
+  height: 30px;
+  border: none;
+  color: lightgray;
+  border-radius: 8px;
+  color: black;
+  cursor: pointer;
+  font-size: 14px;
+}

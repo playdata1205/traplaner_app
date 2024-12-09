@@ -13,6 +13,8 @@ import MyPageTravelPlan from '../pages/MyPage/MyPageTravelPlan';
 import MyPageFavorite from '../pages/MyPage/MyPageFavorite';
 import MyTravelBoard from '../pages/MyPage/MyPageTravelBoard';
 import TravelBoardInfo from '../pages/MyPage/MyTravelBoardInfo';
+import MyPagePwChange from '../pages/MyPage/MyPagePwChange';
+
 const AppRouter = () => {
   return (
     <Routes>
@@ -25,6 +27,7 @@ const AppRouter = () => {
       <Route path='/my-page/mytravel' element={<MyPageTravelPlan />}></Route>
       <Route path='/my-page/favorite' element={<MyPageFavorite />}></Route>
       <Route path='/my-page/mytravelboard' element={<MyTravelBoard />}></Route>
+      <Route path='/my-page/pwChange' element={<MyPagePwChange />}></Route>
       <Route
         path='/my-page/mytravelboard/info/'
         element={<TravelBoardInfo />}

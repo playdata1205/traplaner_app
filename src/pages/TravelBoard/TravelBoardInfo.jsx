@@ -148,21 +148,22 @@ const TravelBoardDetail = () => {
   return isLoading ? (
     <div>Loading...</div>
   ) : (
-    <div className='tb-container'>
-      <h1 className='tb-title'>{travelData.title}</h1>
-      <div className='tb-meta'>
+    <div className='container'>
+      <h1>{travelData.title}</h1>
+      <div className='author-date'>
         {travelData.writer} {travelData.writeDate}
-        <span className='tb-like-wrapper'>
-          <button className='tb-like-btn' onClick={toggleLike}>
+        <span className='heart'>
+          <button id='like-button' onClick={toggleLike}>
             <FontAwesomeIcon
-              className={`tb-like-icon ${isLiked ? 'tb-like-icon--active' : ''}`}
+              id='like-icon'
+              className={isLiked ? 'liked' : ''}
               icon={faHeart}
             />
-            <span className='tb-like-count'>{likeCount}</span>
+            <span id='like-count'>{likeCount}</span>
           </button>
         </span>
       </div>
-      <div className='tb-section'>
+      <div className='section photo'>
         <img
           className='tb-image'
           src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${travelData.travelImg}`}
@@ -170,20 +171,26 @@ const TravelBoardDetail = () => {
           style={{ width: '700px', height: '500px' }}
         />
       </div>
-      <div className='tb-section'>{travelData.content}</div>
+      <div className='section text' id='content'>
+        {travelData.content}
+      </div>
 
       {journey.length > 0 && (
         <iframe
-          className='tb-map'
+          className='map-top'
           height='450'
-          src={generateMapUrl()}
+          src={
+            journey.length === 1
+              ? `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=place_id:${journey[0].locationPin}`
+              : generateMapUrl(journey)
+          }
           allowFullScreen
         ></iframe>
       )}
 
       {Object.entries(groupedJourneys).map(([day, dayJourneys]) => (
-        <div key={day} className='tb-day-container'>
-          <h1 className='tb-title'>DAY {day}</h1>
+        <div key={day} className='day-group'>
+          <h1 className='day'>DAY {day}</h1>
           {dayJourneys.map((journey, index) => (
             <div key={index} className='tb-journey-item'>
               <h4 className='tb-title'>{journey.startTime}</h4>
