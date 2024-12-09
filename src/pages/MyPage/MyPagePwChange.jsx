@@ -1,71 +1,84 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
+import axiosInstance from '../../configs/axios-config';
+import login from '../../context/UserContext';
+import '../../styles/MyPwChange.css';
 
-const MyPage = ({ login }) => {
+const MyPage = () => {
+  const { nickName, profile, id } = useContext(login);
   const [newPw, setNewPw] = useState('');
   const [pwChk, setPwChk] = useState('');
   const [newNick, setNewNick] = useState('');
+  const [memberInfo, setMemberInfo] = useState({});
+
+  useEffect(() => {
+    const getMemberInfo = async () => {
+      const res = await axiosInstance.get(
+        `${API_BASE_URL}${MYPAGE}/my-page/pwChange`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
+          },
+        },
+      );
+      console.log(res.data);
+      const resData = res.data;
+      setMemberInfo(resData);
+    };
+    getMemberInfo();
+  }, []);
 
   const modifyInfo = async (id) => {
-    const url = 'http://localhost:8181/my-page/changeConfirm';
+    console.log('aasdas', id);
 
-    if (newNick === '') {
-      setNewNick(login.nickName);
-    }
-
-    if (newPw !== pwChk) {
-      alert('비밀번호가 같지 않습니다.');
-      setNewPw('');
-      setPwChk('');
-      return;
-    }
-
-    const modiInfo = {
+    const data = {
       id,
       newPw,
       newNick,
     };
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
+    const res = await axiosInstance.post(
+      `${API_BASE_URL}${MYPAGE}/my-page/changeConfirm`,
+      data,
+      {
         headers: {
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
         },
-        body: JSON.stringify(modiInfo),
-      });
-
-      if (response.status === 200) {
-        alert('회원정보 수정 완료');
-        setNewPw('');
-        setPwChk('');
-        setNewNick('');
-      } else {
-        alert('정보 수정 중 문제 발생');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('네트워크 에러');
+      },
+    );
+    if (res.status === 200) {
+      alert('변경성공');
+    } else {
+      alert('변경실패');
     }
   };
 
   const checkNick = async () => {
-    if (newNick === '') {
-      setNewNick(login.nickName);
-    }
-
-    const url = `http://localhost:8181/my-page/nickNameChk/${newNick}`;
-
     try {
-      const response = await fetch(url, { method: 'POST' });
+      if (newNick === '') {
+        alert('닉네임을 입력해주세요');
+        return;
+      }
 
-      if (response.status === 200) {
-        alert('사용 가능한 닉네임입니다.');
+      const res = await axiosInstance.post(
+        `${API_BASE_URL}${MYPAGE}/my-page/nickNameChk/${newNick}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
+          },
+        },
+      );
+
+      if ((res.data = 'success')) {
+        alert('사용 가능한 닉네임입니다');
+        console.log(res.data);
       } else {
-        alert('중복된 닉네임입니다.');
+        alert('이미 사용중인 닉네임입니다');
+        setNewNick('');
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('네트워크 에러');
+      alert('이미 사용중인 닉네임입니다');
+      setNewNick('');
     }
   };
 
@@ -73,13 +86,16 @@ const MyPage = ({ login }) => {
     if (!login.profile) {
       return '/assets/img/anonymous.jpg';
     }
-    return `/display/${login.profile}`;
+    if (login.loginMethod === 'KAKAO') {
+      return login.profile;
+    }
+    return `/display/${profile}`;
   };
 
   return (
-    <div className='container'>
-      <div className='mypage_section'>
-        <div className='mypage_section1'>
+    <div className='pw-change-container'>
+      <div className='pw-change-section'>
+        <div className='pw-change-sidebar'>
           <img
             src={getProfileImage()}
             alt='프사'
@@ -91,18 +107,18 @@ const MyPage = ({ login }) => {
             }}
             className='rounded-pill'
           />
-          <div className='manage_box'>
+          <div className='pw-change-manage-box'>
             <a style={{ fontWeight: 'bold' }} href='/my-page/pwChange'>
               계정관리
             </a>
-            <a href={`/my-page/mytravelboard/${login.nickName}`}>내 게시물</a>
-            <a href={`/my-page/mytravel/${login.id}`}>나의 여행</a>
-            <a href={`/my-page/${login.id}`}>여행일정</a>
-            <a href={`/my-page/favorite/${login.id}`}>좋아요한 게시물</a>
+            <a href={`/my-page/mytravelboard`}>내 게시물</a>
+            <a href={`/my-page/mytravel`}>나의 여행</a>
+            <a href={`/my-page`}>여행일정</a>
+            <a href={`/my-page/favorite`}>좋아요한 게시물</a>
           </div>
         </div>
-        <div className='mypage_section2'>
-          <div className='info-box'>
+        <div className='pw-change-content'>
+          <div className='pw-change-info-box'>
             <img
               src={getProfileImage()}
               alt='프사'
@@ -134,7 +150,7 @@ const MyPage = ({ login }) => {
               value={pwChk}
               onChange={(e) => setPwChk(e.target.value)}
             />
-            <div style={{ textAlign: 'center' }}>
+            <div className='nickname-container'>
               <input
                 id='newNickName'
                 placeholder='새 닉네임'
@@ -142,12 +158,15 @@ const MyPage = ({ login }) => {
                 value={newNick}
                 onChange={(e) => setNewNick(e.target.value)}
               />
-              <button className='nickNameChk' onClick={checkNick}>
+              <button className='pw-change-nick-check' onClick={checkNick}>
                 중복체크
               </button>
             </div>
             <div>
-              <button className='modiBtn' onClick={() => modifyInfo(login.id)}>
+              <button
+                className='pw-change-modify-btn'
+                onClick={() => modifyInfo(memberInfo.id)}
+              >
                 회원정보 수정
               </button>
             </div>
