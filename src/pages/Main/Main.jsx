@@ -6,6 +6,7 @@ import { API_BASE_URL, MAIN } from '../../configs/host-config';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Main.css';
 
+
 const MainPage = () => {
   const { isLoggedIn } = useContext(login); // 로그인 상태
   const [travelList, setTravelList] = useState([]); // 여행 리스트

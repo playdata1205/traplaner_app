@@ -1,0 +1,109 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mypage_section {
+  display: flex;
+  justify-content: center;
+}
+
+.mypage_section1 {
+  display: inline-block;
+  margin-right: 50px;
+  text-align: center;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 5px;
+  margin-bottom: 50px;
+  height: 700px;
+}
+
+.img_box {
+  height: 50%;
+  width: 50%;
+  background-color: blue;
+}
+
+.manage_box {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cal {
+  width: 700px;
+}
+
+#mypage_h1 {
+  margin-bottom: 100px;
+}
+
+.profile_img {
+  width: 200px;
+  height: 200px;
+}
+
+.mypage_section2 {
+  width: 800px;
+}
+
+.con22 input {
+  width: 70%;
+  margin: 5px 0 5px 20px;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  align-content: center;
+}
+
+td {
+  text-align: center;
+}
+
+.searchOption {
+  width: 100px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+}
+
+.manage_box a {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.bottom-section {
+  margin: 0 auto;
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  display: block;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.2s;
+  border: none;
+}
+
+.page-link:hover {
+  background-color: #f0f0f0;
+}

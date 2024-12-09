@@ -1,21 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react'; // FullCalendar React component
-import dayGridPlugin from '@fullcalendar/daygrid'; // for the day grid view
-import '@fullcalendar/common/main.css'; // Core CSS
-import '@fullcalendar/daygrid/main.css'; // DayGrid CSS
+import dayGridPlugin from '@fullcalendar/daygrid'; // for the day grid view // DayGrid CSS
+import { login } from '../../context/UserContext';
+import '../../styles/Mypage.css';
+import axios from 'axios';
+import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
+import { element } from 'prop-types';
 
-const MyPage = ({ login, dtoList }) => {
+const MyPage = ({ dtoList }) => {
+  const { nickName, profile } = useContext(login);
+  const [TravelList, setTravelList] = useState([]);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    // DTO 데이터로 이벤트 세팅
-    const formattedEvents = dtoList.map((dto) => ({
-      title: dto.title,
-      start: dto.startDate,
-      end: dto.endDate,
-    }));
-    setEvents(formattedEvents);
-  }, [dtoList]);
+    const getTravelList = async () => {
+      const res = await axios.get(`${API_BASE_URL}${MYPAGE}/my-page`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
+        },
+      });
+      console.log('asd', res);
+
+      const data = res.data;
+      const formattedEvents = data.map((travel) => ({
+        title: travel.title,
+        start: travel.startDate,
+        end: travel.endDate,
+        id: travel.id,
+      }));
+
+      setEvents(formattedEvents);
+    };
+
+    getTravelList();
+  }, []);
 
   const getProfileImage = () => {
     if (!login.profile) {
@@ -24,7 +42,7 @@ const MyPage = ({ login, dtoList }) => {
     if (login.loginMethod === 'KAKAO') {
       return login.profile;
     }
-    return `/display/${login.profile}`;
+    return `/display/${profile}`;
   };
 
   return (
@@ -44,12 +62,12 @@ const MyPage = ({ login, dtoList }) => {
           />
           <div className='manage_box'>
             <a href='/my-page/pwChange'>계정관리</a>
-            <a href={`/my-page/mytravelboard/${login.nickName}`}>내 게시물</a>
-            <a href={`/my-page/mytravel/${login.id}`}>나의 여행</a>
-            <a href={`/my-page/${login.id}`} style={{ fontWeight: 'bold' }}>
+            <a href={`/my-page/mytravelboard`}>내 게시물</a>
+            <a href={`/my-page/mytravel`}>나의 여행</a>
+            <a href={`/my-page`} style={{ fontWeight: 'bold' }}>
               여행일정
             </a>
-            <a href={`/my-page/favorite/${login.id}`}>좋아요한 게시물</a>
+            <a href={`/my-page/favorite/`}>좋아요한 게시물</a>
           </div>
         </div>
         <div className='mypage_section2'>

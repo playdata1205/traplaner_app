@@ -48,7 +48,7 @@ export const Header = () => {
         {isLoggedIn ? (
           <>
             <li className='nav-item'>
-              <a href={`/my-page/${login.id}`} className='nav-link'>
+              <a href={`/my-page`} className='nav-link'>
                 마이페이지
               </a>
             </li>

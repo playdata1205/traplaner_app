@@ -1,3 +1,4 @@
+
 .travel-plan {
   min-height: calc(100vh - 8vh);
   margin-top: 2vh;
@@ -388,6 +389,10 @@
   transition: background-color 0.2s ease;
 }
 
+#display-budget {
+  margin-right: 10px;
+} */
+
 .journey-view__delete-btn:hover {
   background-color: #ff6b63;
 }
@@ -408,3 +413,4 @@
   color: #666;
   font-size: 14px;
 }
+
