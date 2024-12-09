@@ -22,12 +22,17 @@ const MyPage = ({ dtoList }) => {
       console.log('asd', res);
 
       const data = res.data;
-      const formattedEvents = data.map((travel) => ({
-        title: travel.title,
-        start: travel.startDate,
-        end: travel.endDate,
-        id: travel.id,
-      }));
+      const formattedEvents = data.map((travel) => {
+        const endDate = new Date(travel.endDate);
+        endDate.setDate(endDate.getDate() + 1);
+
+        return {
+          title: travel.title,
+          start: travel.startDate,
+          end: endDate.toISOString().split('T')[0],
+          id: travel.id,
+        };
+      });
 
       setEvents(formattedEvents);
     };
@@ -36,13 +41,11 @@ const MyPage = ({ dtoList }) => {
   }, []);
 
   const getProfileImage = () => {
-    if (!login.profile) {
+    if (!profile) {
       return '/assets/img/anonymous.jpg';
+    } else {
+      return profile;
     }
-    if (login.loginMethod === 'KAKAO') {
-      return login.profile;
-    }
-    return `/display/${profile}`;
   };
 
   return (

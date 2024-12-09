@@ -41,13 +41,11 @@ function MyPageTravelBoard() {
   };
 
   const getProfileImage = () => {
-    if (!login.profile) {
+    if (!profile) {
       return '/assets/img/anonymous.jpg';
+    } else {
+      return profile;
     }
-    if (login.loginMethod === 'KAKAO') {
-      return login.profile;
-    }
-    return `/display/${profile}`;
   };
 
   return (
@@ -104,7 +102,7 @@ function MyPageTravelBoard() {
               </thead>
               <tbody>
                 {boardList.map((dto) => (
-                  <tr key={dto.id} onClick={() => navigateToPost(dto.travelId)}>
+                  <tr key={dto.id} onClick={() => navigateToPost(dto.id)}>
                     <td>{dto.id}</td>
                     <td>
                       <input
@@ -120,8 +118,8 @@ function MyPageTravelBoard() {
               </tbody>
             </table>
 
-            {/* <div className='bottom-section'>
-              <nav aria-label='Page navigation'>
+            <div className='bottom-section'>
+              {/* <nav aria-label='Page navigation'>
                 <ul className='pagination'>
                   {pagination.prev && (
                     <li className='page-item'>
@@ -162,8 +160,8 @@ function MyPageTravelBoard() {
                     </li>
                   )}
                 </ul>
-              </nav>
-            </div> */}
+              </nav> */}
+            </div>
           </div>
         </div>
       </div>

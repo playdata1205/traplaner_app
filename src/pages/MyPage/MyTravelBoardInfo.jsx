@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import '../../styles/MyTravelBoardInfo.css';
 import axiosInstance from '../../configs/axios-config';
@@ -127,6 +127,7 @@ const TravelBoardInfo = () => {
 
     if (response.status === 200) {
       alert('게시글 등록 완료');
+      Navigate('/my-page/mytravel');
     } else {
       alert('게시글 등록 실패');
     }

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import login from '../../context/UserContext';
 
-const MyPage = ({ login }) => {
+const MyPage = () => {
+  const { nickName, profile } = useContext(login);
   const [newPw, setNewPw] = useState('');
   const [pwChk, setPwChk] = useState('');
   const [newNick, setNewNick] = useState('');
@@ -70,12 +72,12 @@ const MyPage = ({ login }) => {
   };
 
   const getProfileImage = () => {
-    if (!login.profile) {
+    if (!profile) {
       return '/assets/img/anonymous.jpg';
+    } else {
+      return profile;
     }
-    return `/display/${login.profile}`;
   };
-
   return (
     <div className='container'>
       <div className='mypage_section'>

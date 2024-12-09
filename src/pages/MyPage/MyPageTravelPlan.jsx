@@ -103,13 +103,11 @@ const MyTravelPage = () => {
   };
 
   const getProfileImage = () => {
-    if (!login.profile) {
+    if (!profile) {
       return '/assets/img/anonymous.jpg';
+    } else {
+      return profile;
     }
-    if (login.loginMethod === 'KAKAO') {
-      return login.profile;
-    }
-    return `/display/${profile}`;
   };
 
   return (
