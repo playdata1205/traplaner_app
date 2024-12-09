@@ -43,22 +43,10 @@ const AppRouter = () => {
         element={<TravelBoardDetail />}
       ></Route>
 
-      {/* <Route
-      
-      
       <Route
         path='/travelplan'
         element={<PrivateRouter element={<TravelPlan />} />}
       ></Route>
-      {/* 
-      <Route path='/travelplan' element={<TravelPlan />}></Route>
-     
-      <Route path='/mypage/account' element={< />}></Route>
-      <Route path='/mypage/travelboard' element={< />}></Route>
-    
-    <Route path='/mypage/mytravel/write' element={<Main />}></Route>
-    <Route path='/mypage/favorite' element={<Main />}></Route>
-*/}
     </Routes>
   );
 };
