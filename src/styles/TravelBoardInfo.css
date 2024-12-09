@@ -34,11 +34,15 @@
 .tb-image {
   max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .tb-map {
-  width: 100%;
-  margin-top: 20px;
+  width: 700px;
+  height: 500px;
+  margin: 20px auto;
+  display: block;
 }
 
 .tb-day-container {
