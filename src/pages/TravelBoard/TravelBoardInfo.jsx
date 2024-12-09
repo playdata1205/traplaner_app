@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { login } from '../../context/UserContext';
 import axios from 'axios';
+import axiosInstance from '../../configs/axios-config';
 import { API_BASE_URL, TRAVELBOARD } from '../../configs/host-config';
 import '../../styles/TravelBoardInfo.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,7 +22,7 @@ const TravelBoardDetail = () => {
   const fetchLikeStatus = async () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
-      const response = await axios.get(
+      const response = await axiosInstance.get(
         `${API_BASE_URL}${TRAVELBOARD}/toggle-like/status/${boardId}`,
         {
           headers: token
@@ -46,7 +47,7 @@ const TravelBoardDetail = () => {
       setIsLoading(true);
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           `${API_BASE_URL}${TRAVELBOARD}/info/${boardId}`,
           {
             headers: token
@@ -57,6 +58,7 @@ const TravelBoardDetail = () => {
           },
         );
         const data = response.data.result;
+        console.log(data);
         setTravelData(data);
         setJourney(data.journeys || []);
         setLikeCount(data.likeCount || 0);
@@ -94,7 +96,7 @@ const TravelBoardDetail = () => {
 
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${API_BASE_URL}${TRAVELBOARD}/toggle-like/${boardId}`,
         {},
         {
@@ -189,6 +191,7 @@ const TravelBoardDetail = () => {
         <div key={day} className='traplan-board-detail__day-section'>
           <h1 className='traplan-board-detail__title'>DAY {day}</h1>
           {dayJourneys.map((journey, index) => (
+
             <div key={index} className='traplan-board-detail__journey-item'>
               <h4 className='traplan-board-detail__metadata'>
                 {journey.startTime}

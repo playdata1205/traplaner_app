@@ -38,11 +38,15 @@
 .traplan-board-detail__image-wrapper img {
   max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
+
 
 .traplan-board-detail__map-container {
   width: 100%;
   margin-top: 20px;
+
 }
 
 .traplan-board-detail__day-section {
@@ -72,11 +76,14 @@
   gap: 5px;
 }
 
+
 .traplan-board-detail__like-icon {
+
   color: #666;
   transition: color 0.2s ease;
   font-size: 1.2rem;
 }
+
 
 .traplan-board-detail__like-icon--active {
   color: #ff006a;
