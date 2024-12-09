@@ -35,16 +35,6 @@ const MyPage = ({ dtoList }) => {
     getTravelList();
   }, []);
 
-  useEffect(() => {
-    // DTO 데이터로 이벤트 세팅
-    // const formattedEvents = dtoList.map((dto) => ({
-    //   title: dto.title,
-    //   start: dto.startDate,
-    //   end: dto.endDate,
-    // }));
-    // setEvents(formattedEvents);
-  }, [dtoList]);
-
   const getProfileImage = () => {
     if (!login.profile) {
       return '/assets/img/anonymous.jpg';
@@ -72,7 +62,7 @@ const MyPage = ({ dtoList }) => {
           />
           <div className='manage_box'>
             <a href='/my-page/pwChange'>계정관리</a>
-            <a href={`/my-page/mytravelboard/${nickName}`}>내 게시물</a>
+            <a href={`/my-page/mytravelboard`}>내 게시물</a>
             <a href={`/my-page/mytravel`}>나의 여행</a>
             <a href={`/my-page`} style={{ fontWeight: 'bold' }}>
               여행일정

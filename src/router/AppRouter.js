@@ -8,6 +8,9 @@ import SignIn from '../pages/Member/SignIn';
 import PasswordChangePage from '../pages/Member/PwChange';
 import MyPage from '../pages/MyPage/MyPage';
 import MyPageTravelPlan from '../pages/MyPage/MyPageTravelPlan';
+import MyPageFavorite from '../pages/MyPage/MyPageFavorite';
+import MyTravelBoard from '../pages/MyPage/MyPageTravelBoard';
+import TravelBoardInfo from '../pages/MyPage/MyTravelBoardInfo';
 const AppRouter = () => {
   return (
     <Routes>
@@ -17,6 +20,12 @@ const AppRouter = () => {
       <Route path='/members/pw-change' element={<PasswordChangePage />}></Route>
       <Route path='/my-page' element={<MyPage />}></Route>
       <Route path='/my-page/mytravel' element={<MyPageTravelPlan />}></Route>
+      <Route path='/my-page/favorite' element={<MyPageFavorite />}></Route>
+      <Route path='/my-page/mytravelboard' element={<MyTravelBoard />}></Route>
+      <Route
+        path='/my-page/mytravelboard/info/'
+        element={<TravelBoardInfo />}
+      ></Route>
       {/* <Route
         path='/travelplan'
         element={<PrivateRouter element={<TravelPlan />} />}
