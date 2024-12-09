@@ -121,19 +121,19 @@ const TravelBoardDetail = () => {
     if (!journey || journey.length === 0) return null;
 
     if (journey.length === 1) {
-      return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&q=place_id:${journey[0].locationPin}`;
+      return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&q=${journey[0].latitude},${journey[0].longitude}`;
     }
 
-    const origin = `place_id:${journey[0].locationPin}`;
-    const destination = `place_id:${journey[journey.length - 1].locationPin}`;
+    const origin = `${journey[0].latitude},${journey[0].longitude}`;
+    const destination = `${journey[journey.length - 1].latitude},${journey[journey.length - 1].longitude}`;
     const waypoints = journey
       .slice(1, -1)
-      .map((j) => `place_id:${j.locationPin}`)
+      .map((j) => `${j.latitude},${j.longitude}`)
       .join('|');
 
     return `https://www.google.com/maps/embed/v1/directions?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&origin=${origin}&destination=${destination}${
       waypoints ? `&waypoints=${waypoints}` : ''
-    }`;
+    }&mode=driving`;
   };
 
   return isLoading ? (
