@@ -57,6 +57,7 @@
 
 #navbar-menu .nav-item {
   position: relative;
+  height: 24px;
 }
 
 #navbar-menu .nav-link {

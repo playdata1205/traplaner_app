@@ -1,27 +1,118 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { login } from '../../context/UserContext';
+import axios from 'axios';
+import { API_BASE_URL, TRAVELBOARD } from '../../configs/host-config';
+import '../../styles/TravelBoardInfo.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useParams } from 'react-router-dom';
 
-const TravelDetail = ({ travelData, userLogin }) => {
-  const [likeCount, setLikeCount] = useState(travelData.likeCount);
-  const [isLiked, setIsLiked] = useState(travelData.likeFlag);
-  const [journey, setJourney] = useState(travelData.journey);
+const TravelBoardDetail = () => {
+  const { boardId } = useParams();
+  const { isLoggedIn } = useContext(login);
+  const [isLoading, setIsLoading] = useState(false);
+  const [travelData, setTravelData] = useState({});
+  const [journey, setJourney] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [groupedJourneys, setGroupedJourneys] = useState({});
 
-  // 좋아요 버튼 토글 핸들러
+  // 좋아요 상태 확인 API 호출
+  const fetchLikeStatus = async () => {
+    try {
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const response = await axios.get(
+        `${API_BASE_URL}${TRAVELBOARD}/toggle-like/status/${boardId}`,
+        {
+          headers: token
+            ? {
+                Authorization: `Bearer ${token}`,
+              }
+            : {},
+        },
+      );
+
+      const isLiked = response.data.result;
+      setIsLiked(isLiked);
+      console.log('좋아요 상태: ', isLiked);
+    } catch (error) {
+      console.error('좋아요 상태 확인 실패: ', error);
+    }
+  };
+
+  // 게시글 데이터 로드
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const token = localStorage.getItem('ACCESS_TOKEN');
+        const response = await axios.get(
+          `${API_BASE_URL}${TRAVELBOARD}/info/${boardId}`,
+          {
+            headers: token
+              ? {
+                  Authorization: `Bearer ${token}`,
+                }
+              : {},
+          },
+        );
+        const data = response.data.result;
+        setTravelData(data);
+        setJourney(data.journeys || []);
+        setLikeCount(data.likeCount || 0);
+
+        // 일정을 day별로 그룹화
+        const grouped = (data.journeys || []).reduce((acc, journey) => {
+          const day = journey.day;
+          if (!acc[day]) {
+            acc[day] = [];
+          }
+          acc[day].push(journey);
+          return acc;
+        }, {});
+        setGroupedJourneys(grouped);
+
+        // 좋아요 상태 확인
+        if (isLoggedIn) {
+          await fetchLikeStatus();
+        }
+      } catch (error) {
+        console.error('데이터를 불러오는데 실패했습니다:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [boardId, isLoggedIn]);
+
   const toggleLike = async () => {
-    if (!userLogin) {
+    if (!isLoggedIn) {
       alert('로그인 하지 않은 사용자는 좋아요를 할 수 없습니다.');
       return;
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:8181/travelboard/${travelData.boardId}/toggle-like`,
-        { method: 'POST' },
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const response = await axios.post(
+        `${API_BASE_URL}${TRAVELBOARD}/toggle-like/${boardId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
       );
-      const updatedCount = await response.text();
-      setLikeCount(Number(updatedCount));
-      setIsLiked((prev) => !prev);
+
+      // 서버에서 반환된 실제 좋아요 수로 업데이트
+      const serverLikeCount = response.data.result;
+      setLikeCount(serverLikeCount);
+
+      // 좋아요 상태 다시 확인
+      await fetchLikeStatus();
     } catch (error) {
-      console.error('Error toggling like:', error);
+      console.error('좋아요 토글 실패:', error.response || error);
+      alert('좋아요 처리 중 오류가 발생했습니다.');
     }
   };
 
@@ -45,22 +136,24 @@ const TravelDetail = ({ travelData, userLogin }) => {
     }`;
   };
 
-  return (
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
     <div className='container'>
       <h1>{travelData.title}</h1>
-      <p className='author-date'>
+      <div className='author-date'>
         {travelData.writer} {travelData.writeDate}
         <span className='heart'>
           <button id='like-button' onClick={toggleLike}>
-            <i
+            <FontAwesomeIcon
               id='like-icon'
-              className={`fa-solid fa-heart ${isLiked ? 'liked' : ''}`}
-            ></i>
+              className={isLiked ? 'liked' : ''}
+              icon={faHeart}
+            />
             <span id='like-count'>{likeCount}</span>
           </button>
         </span>
-      </p>
-
+      </div>
       <div className='section photo'>
         <img
           src={`/display/${travelData.img}`}
@@ -72,29 +165,37 @@ const TravelDetail = ({ travelData, userLogin }) => {
         {travelData.content}
       </div>
 
-      {journey && journey.length > 0 && (
+      {journey.length > 0 && (
         <iframe
           className='map-top'
-          allowFullScreen
           height='450'
-          width='598'
-          src={generateMapUrl()}
+          src={
+            journey.length === 1
+              ? `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=place_id:${journey[0].locationPin}`
+              : generateMapUrl(journey)
+          }
+          allowFullScreen
         ></iframe>
       )}
 
-      {journey.map((j, index) => (
-        <div key={index}>
-          <div className='section photo'>
-            <img src={`/display/${j.journeyImg}`} alt='Journey' />
-          </div>
-          <h2 className='day-date'>{j.journeyStartTime}</h2>
-          <div className='section schedule'>
-            {j.placeName} {j.journeyName}
-          </div>
+      {Object.entries(groupedJourneys).map(([day, dayJourneys]) => (
+        <div key={day} className='day-group'>
+          <h1 className='day'>DAY {day}</h1>
+          {dayJourneys.map((journey, index) => (
+            <div key={index} className='journey-item'>
+              <h4 className='day-date'>{journey.startTime}</h4>
+              <div className='section photo'>
+                <img src={`/display/${journey.journeyImg}`} alt='Journey' />
+              </div>
+              <div className='section schedule'>
+                {journey.accommodationName} {journey.journeyName}
+              </div>
+            </div>
+          ))}
         </div>
       ))}
     </div>
   );
 };
 
-export default TravelDetail;
+export default TravelBoardDetail;
