@@ -1,0 +1,103 @@
+Index: src/pages/Main/Main.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { useState, useEffect, useContext } from 'react';\r\nimport axios from 'axios';\r\nimport { axiosInstance } from '../../configs/axios-config';\r\nimport { login } from '../../context/UserContext';\r\nimport { API_BASE_URL, MAIN } from '../../configs/host-config';\r\nimport 'bootstrap/dist/css/bootstrap.min.css';\r\nimport './Main.css';\r\n\r\n\r\nconst MainPage = () => {\r\n  const { isLoggedIn } = useContext(login); // 로그인 상태\r\n  const [travelList, setTravelList] = useState([]); // 여행 리스트\r\n  const [carouselData, setCarouselData] = useState([]); // 캐러셀 데이터\r\n  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지\r\n  const cardsPerPage = 3;\r\n  const [currentIndex, setCurrentIndex] = useState(0); // 현재 캐러셀 인덱스 추가\r\n\r\n  // 여행 리스트 및 캐러셀 데이터를 가져오는 함수\r\n  useEffect(() => {\r\n    const fetchData = async () => {\r\n      try {\r\n        // 캐러셀 데이터 가져오기\r\n        const carouselResponse = await axios.get(\r\n          `${API_BASE_URL}${MAIN}/top3-favorite`,\r\n        );\r\n        console.log(carouselResponse.data.result);\r\n        setCarouselData(carouselResponse.data.result);\r\n        if (isLoggedIn) {\r\n          // 여행 리스트 데이터 가져오기\r\n          const travelResponse = await axiosInstance.get(\r\n            `${API_BASE_URL}${MAIN}/mytravel-list`,\r\n          );\r\n          setTravelList(travelResponse.data.result);\r\n          console.log(travelResponse.data.result);\r\n        } else {\r\n          setTravelList([]);\r\n        }\r\n      } catch (error) {\r\n        console.error('Error fetching data:', error);\r\n      }\r\n    };\r\n\r\n    fetchData();\r\n  }, [isLoggedIn]);\r\n\r\n  // 자동 슬라이드를 위한 useEffect 추가\r\n  useEffect(() => {\r\n    const autoSlideInterval = setInterval(() => {\r\n      setCurrentIndex((prevIndex) =>\r\n        prevIndex === carouselData.length - 1 ? 0 : prevIndex + 1,\r\n      );\r\n    }, 5000); // 5초마다 실행\r\n\r\n    // 컴포넌트가 언마운트되 인터벌 정리\r\n    return () => clearInterval(autoSlideInterval);\r\n  }, [carouselData.length]); // carouselData.length가 변경될 때마다 인터벌 재설정\r\n\r\n  // 여행 카드를 페이지네이션으로 표시\r\n  const displayCards = () => {\r\n    const start = (currentPage - 1) * cardsPerPage;\r\n    const end = start + cardsPerPage;\r\n    return travelList.slice(start, end).map((card) => (\r\n      <div className='col' key={card.id}>\r\n        <div className='card shadow-sm'>\r\n          <a\r\n            href={`/travelboard/info/${card.id}`}\r\n            style={{ textDecoration: 'none' }}\r\n          >\r\n            {card.travelImg ? (\r\n              <img\r\n                src={`https://traplaner-images.s3.ap-northeast-2.amazonaws.com/${card.travelImg}`}\r\n                alt={card.title}\r\n                className='card-img-top'\r\n              />\r\n            ) : (\r\n              <div className='no-image-container'>\r\n                <span>이미지 없음</span>\r\n              </div>\r\n            )}\r\n            <div className='pt-2'>\r\n              <h6 className='card-title'>{card.title}</h6>\r\n            </div>\r\n          </a>\r\n        </div>\r\n      </div>\r\n    ));\r\n  };\r\n\r\n  // 페이지네이션 UI 표시\r\n  const displayPagination = () => {\r\n    const pageCount = Math.ceil(travelList.length / cardsPerPage);\r\n    return Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (\r\n      <li\r\n        key={page}\r\n        className={`page-item ${page === currentPage ? 'active' : ''}`}\r\n      >\r\n        <a\r\n          className='page-link'\r\n          href='#'\r\n          onClick={(e) => {\r\n            e.preventDefault();\r\n            setCurrentPage(page);\r\n          }}\r\n        >\r\n          {page}\r\n        </a>\r\n      </li>\r\n    ));\r\n  };\r\n\r\n  // 캐러셀 제어 함수 추가\r\n  const handlePrevSlide = () => {\r\n    setCurrentIndex((prevIndex) =>\r\n      prevIndex === 0 ? carouselData.length - 1 : prevIndex - 1,\r\n    );\r\n  };\r\n\r\n  const handleNextSlide = () => {\r\n    setCurrentIndex((prevIndex) =>\r\n      prevIndex === carouselData.length - 1 ? 0 : prevIndex + 1,\r\n    );\r\n  };\r\n\r\n  return (\r\n    <div className='container custom-container mt-3'>\r\n      {/* 추천 여행지 슬라이드 수정 */}\r\n      <div className='recommended-section mb-3'>\r\n        <h3 className='section-title mb-3'>\r\n          추천 여행지 <span className='highlight'>TOP 3</span>\r\n        </h3>\r\n        <div id='demo' className='carousel slide custom-carousel'>\r\n          <div className='carousel-inner rounded-4 shadow'>\r\n            {carouselData.map((travel, index) => (\r\n              <div\r\n                key={travel.id}\r\n                className={`carousel-item ${index === currentIndex ? 'active' : ''}`}\r\n              >\r\n                <a href={`/travelboard/info/${travel.id}`}>\r\n                  <img\r\n                    src={`https://traplaner-images.s3.ap-northeast-2.amazonaws.com/${travel.travelImg}`}\r\n                    className='d-block w-100'\r\n                    alt={travel.title}\r\n                  />\r\n                  <div className='carousel-caption d-flex flex-column justify-content-between'>\r\n                    <h5 className='travel-title-top'>{travel.title}</h5>\r\n                    <h5 className='travel-title'>{travel.title}</h5>\r\n                  </div>\r\n                </a>\r\n              </div>\r\n            ))}\r\n          </div>\r\n          <button\r\n            className='carousel-control-prev custom-carousel-button'\r\n            type='button'\r\n            onClick={handlePrevSlide}\r\n          >\r\n            <span className='carousel-control-prev-icon'></span>\r\n          </button>\r\n          <button\r\n            className='carousel-control-next custom-carousel-button'\r\n            type='button'\r\n            onClick={handleNextSlide}\r\n          >\r\n            <span className='carousel-control-next-icon'></span>\r\n          </button>\r\n        </div>\r\n      </div>\r\n\r\n      {/* My Travel List */}\r\n\r\n      <div className='travel-list-section mt-3'>\r\n        <h3 className='section-title mb-3'>나의 여행 목록</h3>\r\n        <div\r\n          id='card-container'\r\n          className={`row row-cols-1 row-cols-md-3 g-3 ${isLoggedIn ? 'logged-in' : ''}`}\r\n        >\r\n          <div className='col'>\r\n            <div className='card travel-card h-100 border-0 shadow-sm'>\r\n              <a href='/travelplan' className='add-travel-link'>\r\n                <div className='card-img-wrapper'>\r\n                  <img\r\n                    src='/assets/img/add-800x320.jpg'\r\n                    alt='여행 추가'\r\n                    className='card-img-top img-fluid'\r\n                  />\r\n                </div>\r\n                <div className='card-body text-center'>\r\n                  <h6 className='card-title'>새로운 여행 계획하기</h6>\r\n                </div>\r\n              </a>\r\n            </div>\r\n          </div>\r\n          {isLoggedIn && displayCards()}\r\n        </div>\r\n        <nav aria-label='Page navigation' className='mt-3'>\r\n          <ul className='pagination justify-content-center custom-pagination'>\r\n            {displayPagination()}\r\n          </ul>\r\n        </nav>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default MainPage;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/Main/Main.jsx b/src/pages/Main/Main.jsx
+--- a/src/pages/Main/Main.jsx	(revision c2fcc77fb0e0b5fe3c2c63cf0716b32f928471ea)
++++ b/src/pages/Main/Main.jsx	(date 1733716182015)
+@@ -6,7 +6,6 @@
+ import 'bootstrap/dist/css/bootstrap.min.css';
+ import './Main.css';
+ 
+-
+ const MainPage = () => {
+   const { isLoggedIn } = useContext(login); // 로그인 상태
+   const [travelList, setTravelList] = useState([]); // 여행 리스트
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c2b42fea-0f23-4c04-94e0-0c0925507fa2\" name=\"변경\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\"><![CDATA[{\r\n  \"lastFilter\": {\r\n    \"state\": \"OPEN\",\r\n    \"assignee\": \"bildno\"\r\n  }\r\n}]]></component>\r\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\r\n  \"selectedUrlAndAccountId\": {\r\n    \"url\": \"https://github.com/bildno/traplaner_front.git\",\r\n    \"accountId\": \"2abbf657-9d2c-457b-9ed8-14d85b49a747\"\r\n  }\r\n}]]></component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"customColor\": \"\",\r\n  \"associatedIndex\": 1\r\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"2pm8U3tVfO5Mx0I2lbRPlAAZgyu\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"mypage\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"traplaner_front\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"traplaner_front\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"애플리케이션 수준\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"디폴트 작업\">\r\n      <changelist id=\"c2b42fea-0f23-4c04-94e0-0c0925507fa2\" name=\"변경\" comment=\"\" />\r\n      <created>1733359903244</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1733359903244</updated>\r\n      <workItem from=\"1733359904651\" duration=\"856000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c2fcc77fb0e0b5fe3c2c63cf0716b32f928471ea)
++++ b/.idea/workspace.xml	(date 1733715418815)
+@@ -4,7 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c2b42fea-0f23-4c04-94e0-0c0925507fa2" name="변경" comment="" />
++    <list default="true" id="c2b42fea-0f23-4c04-94e0-0c0925507fa2" name="변경" comment="mypage 임시 커밋" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -18,39 +18,39 @@
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+-  "lastFilter": {
+-    "state": "OPEN",
+-    "assignee": "bildno"
++  <component name="GitHubPullRequestSearchHistory">{
++  &quot;lastFilter&quot;: {
++    &quot;state&quot;: &quot;OPEN&quot;,
++    &quot;assignee&quot;: &quot;bildno&quot;
+   }
+-}]]></component>
+-  <component name="GithubPullRequestsUISettings"><![CDATA[{
+-  "selectedUrlAndAccountId": {
+-    "url": "https://github.com/bildno/traplaner_front.git",
+-    "accountId": "2abbf657-9d2c-457b-9ed8-14d85b49a747"
++}</component>
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/bildno/traplaner_front.git&quot;,
++    &quot;accountId&quot;: &quot;2abbf657-9d2c-457b-9ed8-14d85b49a747&quot;
+   }
+-}]]></component>
+-  <component name="ProjectColorInfo"><![CDATA[{
+-  "customColor": "",
+-  "associatedIndex": 1
+-}]]></component>
++}</component>
++  <component name="ProjectColorInfo">{
++  &quot;customColor&quot;: &quot;&quot;,
++  &quot;associatedIndex&quot;: 1
++}</component>
+   <component name="ProjectId" id="2pm8U3tVfO5Mx0I2lbRPlAAZgyu" />
+   <component name="ProjectViewState">
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "git-widget-placeholder": "mypage",
+-    "kotlin-language-version-configured": "true",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;mypage&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RunManager">
+     <configuration default="true" type="JetRunConfigurationType">
+       <module name="traplaner_front" />

@@ -1,4 +1,4 @@
-.container {
+.mypage {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -7,12 +7,12 @@
   margin-top: 50px;
 }
 
-.mypage_section {
+.mypage__content {
   display: flex;
   justify-content: center;
 }
 
-.mypage_section1 {
+.mypage__sidebar {
   display: inline-block;
   margin-right: 50px;
   text-align: center;
@@ -22,35 +22,32 @@
   height: 700px;
 }
 
-.img_box {
-  height: 50%;
-  width: 50%;
-  background-color: blue;
+.mypage__profile {
+  width: 250px;
+  border-radius: 50%;
+  margin-bottom: 50px;
+  margin-top: 30px;
 }
 
-.manage_box {
+.mypage__nav {
   width: 500px;
   display: flex;
   flex-direction: column;
 }
 
-.cal {
-  width: 700px;
+.mypage__nav-link {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
 }
 
-#mypage_h1 {
-  margin-bottom: 100px;
+.mypage__nav-link--active {
+  font-weight: bold;
 }
 
-.profile_img {
-  width: 200px;
-  height: 200px;
-}
-
-.mypage_section2 {
+.mypage__calendar {
   width: 800px;
 }
-
 .manage_box a {
   margin-bottom: 20px;
   text-decoration: none;

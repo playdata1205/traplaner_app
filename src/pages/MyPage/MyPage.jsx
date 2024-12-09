@@ -3,7 +3,7 @@ import FullCalendar from '@fullcalendar/react'; // FullCalendar React component
 import dayGridPlugin from '@fullcalendar/daygrid'; // for the day grid view // DayGrid CSS
 import { login } from '../../context/UserContext';
 import '../../styles/Mypage.css';
-import axios from 'axios';
+import axiosInstance from '../../configs/axios-config';
 import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
 import { element } from 'prop-types';
 
@@ -14,7 +14,7 @@ const MyPage = ({ dtoList }) => {
 
   useEffect(() => {
     const getTravelList = async () => {
-      const res = await axios.get(`${API_BASE_URL}${MYPAGE}/my-page`, {
+      const res = await axiosInstance.get(`${API_BASE_URL}${MYPAGE}/my-page`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
         },
@@ -46,31 +46,36 @@ const MyPage = ({ dtoList }) => {
   };
 
   return (
-    <div className='container'>
-      <div className='mypage_section'>
-        <div className='mypage_section1'>
+    <div className='mypage'>
+      <div className='mypage__content'>
+        <div className='mypage__sidebar'>
           <img
             src={getProfileImage()}
-            alt='프사'
-            className='profile-img'
-            style={{
-              width: '250px',
-              borderRadius: '50%',
-              marginBottom: '50px',
-              marginTop: '30px',
-            }}
+            alt='프로필 이미지'
+            className='mypage__profile'
           />
-          <div className='manage_box'>
-            <a href='/my-page/pwChange'>계정관리</a>
-            <a href={`/my-page/mytravelboard`}>내 게시물</a>
-            <a href={`/my-page/mytravel`}>나의 여행</a>
-            <a href={`/my-page`} style={{ fontWeight: 'bold' }}>
+          <nav className='mypage__nav'>
+            <a href='/my-page/pwChange' className='mypage__nav-link'>
+              계정관리
+            </a>
+            <a href='/my-page/mytravelboard' className='mypage__nav-link'>
+              내 게시물
+            </a>
+            <a href='/my-page/mytravel' className='mypage__nav-link'>
+              나의 여행
+            </a>
+            <a
+              href='/my-page'
+              className='mypage__nav-link mypage__nav-link--active'
+            >
               여행일정
             </a>
-            <a href={`/my-page/favorite/`}>좋아요한 게시물</a>
-          </div>
+            <a href='/my-page/favorite' className='mypage__nav-link'>
+              좋아요한 게시물
+            </a>
+          </nav>
         </div>
-        <div className='mypage_section2'>
+        <div className='mypage__calendar'>
           <FullCalendar
             plugins={[dayGridPlugin]}
             initialView='dayGridMonth'

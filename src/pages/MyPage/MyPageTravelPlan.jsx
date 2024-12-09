@@ -112,54 +112,59 @@ const MyTravelPage = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='mypage_section'>
-        <div className='mypage_section1'>
+    <div className='mypage'>
+      <div className='mypage__layout'>
+        <div className='mypage__sidebar'>
           <img
             src={getProfileImage()}
-            alt='프사'
-            className='profile-img'
-            style={{
-              width: '250px',
-              borderRadius: '50%',
-              marginBottom: '50px',
-              marginTop: '30px',
-            }}
+            alt='프로필 이미지'
+            className='mypage__profile-image'
           />
-          <div className='manage_box'>
-            <a href='/my-page/pwChange'>계정관리</a>
-            <a href={`/my-page/mytravelboard`}>내 게시물</a>
-            <a href={`/my-page/mytravel`} style={{ fontWeight: 'bold' }}>
+          <nav className='mypage__nav'>
+            <a href='/my-page/pwChange' className='mypage__nav-link'>
+              계정관리
+            </a>
+            <a href='/my-page/mytravelboard' className='mypage__nav-link'>
+              내 게시물
+            </a>
+            <a
+              href='/my-page/mytravel'
+              className='mypage__nav-link mypage__nav-link--active'
+            >
               나의 여행
             </a>
-            <a href={`/my-page`}>여행일정</a>
-            <a href={`/my-page/favorite`}>좋아요한 게시물</a>
-          </div>
+            <a href='/my-page' className='mypage__nav-link'>
+              여행일정
+            </a>
+            <a href='/my-page/favorite' className='mypage__nav-link'>
+              좋아요한 게시물
+            </a>
+          </nav>
         </div>
-        <div className='mypage_section2'>
-          <div className='con22'>
+        <div className='mypage__content'>
+          <div className='mypage__travel'>
             <select
-              className='searchOption'
+              className='mypage__travel-select'
               value={searchOption}
               onChange={handleSearchOptionChange}
             >
               <option value='pastOrder'>과거순</option>
               <option value='up-to-date-order'>최신순</option>
             </select>
-            <table>
+            <table className='mypage__travel-table'>
               <thead>
                 <tr>
-                  <th style={{ width: '10%', padding: '12px' }}>번호</th>
-                  <th style={{ width: '40%', padding: '12px' }}>게시글 제목</th>
-                  <th style={{ width: '30%', padding: '12px' }}>여행기간</th>
-                  <th style={{ width: '20%', padding: '12px' }}>공유여부</th>
+                  <th className='mypage__travel-cell'>번호</th>
+                  <th className='mypage__travel-cell'>게시글 제목</th>
+                  <th className='mypage__travel-cell'>여행기간</th>
+                  <th className='mypage__travel-cell'>공유여부</th>
                 </tr>
               </thead>
               <tbody>
                 {travels.map((travel) => (
                   <tr key={travel.id}>
-                    <td style={{ padding: '10px' }}>{travel.id}</td>
-                    <td style={{ padding: '10px' }}>
+                    <td className='mypage__travel-cell'>{travel.id}</td>
+                    <td className='mypage__travel-cell'>
                       <Link
                         to={`/my-page/mytravelboard/info`}
                         state={{ travelId: travel.id }}
@@ -167,22 +172,23 @@ const MyTravelPage = () => {
                         {travel.title}
                       </Link>
                     </td>
-                    <td style={{ padding: '10px' }}>
+                    <td className='mypage__travel-cell'>
                       {moment(travel.startDate).format('YYYY-MM-DD')} ~
                       {moment(travel.endDate).format('YYYY-MM-DD')}
                     </td>
-                    <td style={{ padding: '10px' }}>
+                    <td className='mypage__travel-cell'>
                       <input
                         type='checkbox'
+                        className='mypage__travel-checkbox'
                         checked={travel.share === true}
                         onChange={() => toggleShare(travel.id)}
                       />
                     </td>
-                    <td style={{ padding: '10px' }}>
+                    <td className='mypage__travel-cell'>
                       <img
                         src='/assets/img/delete.png'
                         alt='삭제'
-                        style={{ width: 20, cursor: 'pointer' }}
+                        className='mypage__travel-delete'
                         onClick={() => deleteTravel(travel.id)}
                       />
                     </td>
@@ -190,9 +196,12 @@ const MyTravelPage = () => {
                 ))}
               </tbody>
             </table>
-            <div className='pagination'>
+            <div className='mypage__pagination'>
               {pagination.prev && (
-                <button onClick={() => fetchTravels(pagination.begin - 1)}>
+                <button
+                  className='mypage__pagination-button'
+                  onClick={() => fetchTravels(pagination.begin - 1)}
+                >
                   이전
                 </button>
               )}
@@ -200,12 +209,19 @@ const MyTravelPage = () => {
                 { length: pagination.end - pagination.begin + 1 },
                 (_, i) => pagination.begin + i,
               ).map((page) => (
-                <button key={page} onClick={() => fetchTravels(page)}>
+                <button
+                  key={page}
+                  className='mypage__pagination-button'
+                  onClick={() => fetchTravels(page)}
+                >
                   {page}
                 </button>
               ))}
               {pagination.next && (
-                <button onClick={() => fetchTravels(pagination.end + 1)}>
+                <button
+                  className='mypage__pagination-button'
+                  onClick={() => fetchTravels(pagination.end + 1)}
+                >
                   다음
                 </button>
               )}

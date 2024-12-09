@@ -1,4 +1,4 @@
-.container {
+.travel-board {
   width: 90%;
   max-width: 980px;
   padding: 40px 80px;
@@ -7,46 +7,46 @@
   border-radius: 1%;
 }
 
-h1 {
+.travel-board__title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 12px;
 }
 
-.author-date {
+.travel-board__meta {
   font-size: 14px;
   color: #606060;
   margin-bottom: 20px;
 }
 
-.heart {
+.travel-board__like {
   float: right;
   margin-left: 10px;
 }
 
-.section {
+.travel-board__section {
   margin-bottom: 16px;
   text-align: center;
 }
 
-.photo img {
+.travel-board__image {
   max-width: 100%;
   height: auto;
 }
 
-.map-top {
+.travel-board__map {
   width: 100%;
   margin-top: 20px;
 }
 
-.day-group {
+.travel-board__day {
   margin-bottom: 40px;
   padding: 20px;
   border-radius: 8px;
   background-color: #f8f9fa;
 }
 
-.journey-item {
+.travel-board__journey {
   margin-bottom: 20px;
   padding: 15px;
   border-radius: 4px;
@@ -54,7 +54,7 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#like-button {
+.travel-board__like-button {
   border: none;
   background: transparent;
   cursor: pointer;
@@ -66,19 +66,17 @@ h1 {
   gap: 5px;
 }
 
-#like-icon {
-  /* 기본 색상 */
+.travel-board__like-icon {
   color: #666;
   transition: color 0.2s ease;
   font-size: 1.2rem;
 }
 
-#like-icon.liked {
-  /* 좋아요 클릭 후 색상 */
+.travel-board__like-icon--active {
   color: #ff006a;
 }
 
-#like-count {
+.travel-board__like-count {
   font-size: 14px;
   color: #666;
   min-width: 20px;

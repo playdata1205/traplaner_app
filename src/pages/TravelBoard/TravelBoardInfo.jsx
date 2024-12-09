@@ -139,55 +139,55 @@ const TravelBoardDetail = () => {
   return isLoading ? (
     <div>Loading...</div>
   ) : (
-    <div className='container'>
-      <h1>{travelData.title}</h1>
-      <div className='author-date'>
+    <div className='travel-board'>
+      <h1 className='travel-board__title'>{travelData.title}</h1>
+      <div className='travel-board__meta'>
         {travelData.writer} {travelData.writeDate}
-        <span className='heart'>
-          <button id='like-button' onClick={toggleLike}>
+        <span className='travel-board__like'>
+          <button className='travel-board__like-button' onClick={toggleLike}>
             <FontAwesomeIcon
-              id='like-icon'
-              className={isLiked ? 'liked' : ''}
+              className={`travel-board__like-icon ${isLiked ? 'travel-board__like-icon--active' : ''}`}
               icon={faHeart}
             />
-            <span id='like-count'>{likeCount}</span>
+            <span className='travel-board__like-count'>{likeCount}</span>
           </button>
         </span>
       </div>
-      <div className='section photo'>
+      <div className='travel-board__section'>
         <img
+          className='travel-board__image'
           src={`/display/${travelData.img}`}
           alt='Travel'
           style={{ width: '700px', height: '500px' }}
         />
       </div>
-      <div className='section text' id='content'>
-        {travelData.content}
-      </div>
+      <div className='travel-board__section'>{travelData.content}</div>
 
       {journey.length > 0 && (
         <iframe
-          className='map-top'
+          className='travel-board__map'
           height='450'
-          src={
-            journey.length === 1
-              ? `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=place_id:${journey[0].locationPin}`
-              : generateMapUrl(journey)
-          }
+          src={generateMapUrl()}
           allowFullScreen
         ></iframe>
       )}
 
       {Object.entries(groupedJourneys).map(([day, dayJourneys]) => (
-        <div key={day} className='day-group'>
-          <h1 className='day'>DAY {day}</h1>
+        <div key={day} className='travel-board__day'>
+          <h1 className='travel-board__title'>DAY {day}</h1>
           {dayJourneys.map((journey, index) => (
-            <div key={index} className='journey-item'>
-              <h4 className='day-date'>{journey.startTime}</h4>
-              <div className='section photo'>
-                <img src={`/display/${journey.journeyImg}`} alt='Journey' />
+            <div key={index} className='travel-board__journey'>
+              <h4 className='travel-board__journey-time'>
+                {journey.startTime}
+              </h4>
+              <div className='travel-board__section'>
+                <img
+                  className='travel-board__image'
+                  src={`/display/${journey.journeyImg}`}
+                  alt='Journey'
+                />
               </div>
-              <div className='section schedule'>
+              <div className='travel-board__section'>
                 {journey.accommodationName} {journey.journeyName}
               </div>
             </div>
