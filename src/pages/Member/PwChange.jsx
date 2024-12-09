@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../styles/PwChange.css';
 
 const PasswordChangePage = () => {
   const [email, setEmail] = useState('');

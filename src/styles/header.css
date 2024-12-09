@@ -55,6 +55,7 @@
 
 #navbar-menu .nav-item {
   position: relative;
+  height: 24px;
 }
 
 #navbar-menu .nav-link {
@@ -65,7 +66,7 @@
 }
 
 #navbar-menu .nav-link:hover {
-  color:#34b352; 
+  color: #34b352;
 }
 
 /* 모바일 메뉴 토글 버튼 */

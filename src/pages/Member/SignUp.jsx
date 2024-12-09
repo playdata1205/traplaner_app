@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { API_BASE_URL, MEMBER } from '../../configs/host-config';
-import '../../styles/SignUp.css';
 
 function debounce(callback, wait) {
   let timeout;
