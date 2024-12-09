@@ -191,7 +191,6 @@ const TravelBoardDetail = () => {
         <div key={day} className='traplan-board-detail__day-section'>
           <h1 className='traplan-board-detail__title'>DAY {day}</h1>
           {dayJourneys.map((journey, index) => (
-
             <div key={index} className='traplan-board-detail__journey-item'>
               <h4 className='traplan-board-detail__metadata'>
                 {journey.startTime}
