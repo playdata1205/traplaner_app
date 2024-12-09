@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { API_BASE_URL, TRAVELBOARD } from '../../configs/host-config';
 import '../../styles/TravelBoardList.css';
 
@@ -77,7 +78,7 @@ const TravelBoardList = () => {
                 className='image'
               />
               <div>
-                <h4>{board.writeDate}</h4>
+                <h4>{moment(board.writeDate).format('YYYY-MM-DD')}</h4>
                 <h4>{board.title}</h4>
                 <p>{board.nickName}</p>
                 <p>❤️ {board.likeCount}</p>

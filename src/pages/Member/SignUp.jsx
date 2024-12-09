@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { API_BASE_URL, MEMBER } from '../../configs/host-config';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/SignUp.css';
 
 function debounce(callback, wait) {
@@ -19,6 +20,7 @@ function SignUpForm() {
     profileImage: null,
   });
 
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [validFields, setValidFields] = useState({
     email: false,
@@ -148,6 +150,7 @@ function SignUpForm() {
         body: form,
       });
       alert('회원가입 성공!');
+      navigate('/members/sign-in');
     } else {
       alert('입력값을 확인해주세요!');
     }
