@@ -9,12 +9,13 @@ main {
 }
 
 .list-container {
-  width: 1050px;
+  max-width: 1050px;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 45px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 .list-container .goPost {

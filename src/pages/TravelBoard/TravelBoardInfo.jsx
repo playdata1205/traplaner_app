@@ -120,20 +120,27 @@ const TravelBoardDetail = () => {
   const generateMapUrl = () => {
     if (!journey || journey.length === 0) return null;
 
+    // 장소가 하나일 경우
     if (journey.length === 1) {
-      return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&q=place_id:${journey[0].locationPin}`;
+      const location = encodeURIComponent(
+        journey[0].accommodationName || journey[0].journeyName,
+      );
+      return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&q=${location}`;
     }
 
-    const origin = `place_id:${journey[0].locationPin}`;
-    const destination = `place_id:${journey[journey.length - 1].locationPin}`;
-    const waypoints = journey
-      .slice(1, -1)
-      .map((j) => `place_id:${j.locationPin}`)
-      .join('|');
+    // 여러 장소가 있는 경우
+    const locations = journey.map((j) =>
+      encodeURIComponent(j.accommodationName || j.journeyName),
+    );
+    const origin = locations[0];
+    const destination = locations[locations.length - 1];
+    const waypoints = locations.slice(1, -1).join('|');
 
-    return `https://www.google.com/maps/embed/v1/directions?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&origin=${origin}&destination=${destination}${
-      waypoints ? `&waypoints=${waypoints}` : ''
-    }`;
+    return `https://www.google.com/maps/embed/v1/directions?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I
+      &origin=${origin}
+      &destination=${destination}
+      ${waypoints ? `&waypoints=${waypoints}` : ''}
+      &mode=driving`.replace(/\s+/g, '');
   };
 
   return isLoading ? (
