@@ -72,7 +72,7 @@ const TravelBoardList = () => {
               className='goPost'
             >
               <img
-                src={board.travelImg}
+                src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${board.travelImg}`}
                 alt={`${board.title} 여행 이미지`}
                 className='image'
               />

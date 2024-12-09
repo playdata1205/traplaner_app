@@ -34,11 +34,15 @@
 .tb-image {
   max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .tb-map {
-  width: 100%;
-  margin-top: 20px;
+  width: 700px;
+  height: 500px;
+  margin: 20px auto;
+  display: block;
 }
 
 .tb-day-container {
@@ -68,14 +72,14 @@
   gap: 5px;
 }
 
-#like-icon {
+.tb-like-icon {
   /* 기본 색상 */
   color: #666;
   transition: color 0.2s ease;
   font-size: 1.2rem;
 }
 
-#like-icon.liked {
+.tb-like-icon--active {
   /* 좋아요 클릭 후 색상 */
   color: #ff006a;
 }
