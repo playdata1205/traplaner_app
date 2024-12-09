@@ -1,4 +1,4 @@
-.tb-container {
+.traplan-board-detail {
   width: 90%;
   max-width: 980px;
   padding: 40px 80px;
@@ -6,53 +6,57 @@
   border: 1px solid #ddd;
   border-radius: 1%;
   margin: 0 auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.tb-title {
+.traplan-board-detail__title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 12px;
 }
 
-.tb-meta {
+.traplan-board-detail__metadata {
   font-size: 14px;
   color: #606060;
   margin-bottom: 20px;
 }
 
-.tb-like-wrapper {
+.traplan-board-detail__heart-container {
   float: right;
   margin-left: 10px;
 }
 
-.tb-section {
+.traplan-board-detail__content-section {
   margin-bottom: 16px;
   text-align: left;
 }
 
-.tb-image {
+.traplan-board-detail__text-content {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.traplan-board-detail__image-wrapper img {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
 }
 
-.tb-map {
-  width: 700px;
-  height: 500px;
-  margin: 20px auto;
-  display: block;
+
+.traplan-board-detail__map-container {
+  width: 100%;
+  margin-top: 20px;
+
 }
 
-.tb-day-container {
+.traplan-board-detail__day-section {
   margin-bottom: 40px;
   padding: 20px;
   border-radius: 8px;
   background-color: #f8f9fa;
 }
 
-.tb-journey-item {
+.traplan-board-detail__journey-item {
   margin-bottom: 20px;
   padding: 15px;
   border-radius: 4px;
@@ -60,7 +64,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.tb-like-btn {
+.traplan-board-detail__like-button {
   border: none;
   background: transparent;
   cursor: pointer;
@@ -72,19 +76,20 @@
   gap: 5px;
 }
 
-.tb-like-icon {
-  /* 기본 색상 */
+
+.traplan-board-detail__like-icon {
+
   color: #666;
   transition: color 0.2s ease;
   font-size: 1.2rem;
 }
 
-.tb-like-icon--active {
-  /* 좋아요 클릭 후 색상 */
+
+.traplan-board-detail__like-icon--active {
   color: #ff006a;
 }
 
-.tb-like-count {
+.traplan-board-detail__like-count {
   font-size: 14px;
   color: #666;
   min-width: 20px;

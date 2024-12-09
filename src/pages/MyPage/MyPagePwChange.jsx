@@ -21,9 +21,8 @@ const MyPage = () => {
           },
         },
       );
-      console.log(res.data);
-      const resData = res.data;
-      setMemberInfo(resData);
+
+      setMemberInfo(res);
     };
     getMemberInfo();
   }, []);
@@ -165,7 +164,7 @@ const MyPage = () => {
             <div>
               <button
                 className='pw-change-modify-btn'
-                onClick={() => modifyInfo(memberInfo.id)}
+                onClick={() => modifyInfo(login.id)}
               >
                 회원정보 수정
               </button>
