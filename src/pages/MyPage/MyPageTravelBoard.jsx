@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
 import login from '../../context/UserContext';
-// import './MyPage.css'; // CSS 파일로 스타일을 분리합니다.
+import '../../styles/MyPageTravelBoard.css';
 
 function MyPageTravelBoard() {
   const { nickName, profile } = useContext(login);
@@ -50,9 +50,9 @@ function MyPageTravelBoard() {
   };
 
   return (
-    <div className='container'>
-      <div className='mypage_section'>
-        <div className='mypage_section1'>
+    <div className='mypage-travel-board-container'>
+      <div className='mypage-travel-board-section'>
+        <div className='mypage-travel-board-section1'>
           {login?.profile ? (
             <img
               src={login.profile}
@@ -72,7 +72,7 @@ function MyPageTravelBoard() {
               }}
             />
           )}
-          <div className='manage_box'>
+          <div className='mypage-travel-board-manage-box'>
             <a href='/my-page/pwChange'>계정관리</a>
             <a href={`/my-page/mytravelboard`} style={{ fontWeight: 'bold' }}>
               내 게시물
@@ -82,7 +82,7 @@ function MyPageTravelBoard() {
             <a href={`/my-page/favorite`}>좋아요한 게시물</a>
           </div>
         </div>
-        <div className='mypage_section2'>
+        <div className='mypage-travel-board-section2'>
           <div className='con22'>
             {/* <select
               name='searchOption'
@@ -110,7 +110,7 @@ function MyPageTravelBoard() {
                         type='text'
                         value={dto.content}
                         readOnly
-                        className='readonly-input'
+                        className='mypage-travel-board-readonly-input'
                       />
                     </td>
                     <td>{dto.writeDate}</td>

@@ -1,0 +1,129 @@
+.mypageFavorite-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.mypageFavorite-section {
+  display: flex;
+  justify-content: center;
+}
+
+.mypageFavorite-leftSection {
+  display: inline-block;
+  margin-right: 50px;
+  text-align: center;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 5px;
+  margin-bottom: 50px;
+  height: 700px;
+}
+
+.mypageFavorite-imgBox {
+  height: 50%;
+  width: 50%;
+  background-color: blue;
+}
+
+.mypageFavorite-manageBox {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mypageFavorite-calendar {
+  width: 700px;
+}
+
+.mypageFavorite-heading {
+  margin-bottom: 100px;
+}
+
+.mypageFavorite-profileImg {
+  width: 200px;
+  height: 200px;
+}
+
+.mypageFavorite-rightSection {
+  width: 800px;
+}
+
+.mypageFavorite-content input {
+  width: 80%;
+  margin: 5px 0 5px 20px;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  align-content: center;
+}
+
+.mypageFavorite-tableCell {
+  text-align: center;
+}
+
+.mypageFavorite-searchOption {
+  width: 100px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+}
+
+.mypageFavorite-manageBox a {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.mypageFavorite-bottomSection {
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.mypageFavorite-pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mypageFavorite-pageItem {
+  margin: 0 5px;
+}
+
+.mypageFavorite-pageLink {
+  display: block;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.2s;
+  border: none;
+}
+
+.mypageFavorite-pageLink:hover {
+  background-color: #f0f0f0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5;
+}

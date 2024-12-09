@@ -1,0 +1,112 @@
+.mypage-travel-board-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+.mypage-travel-board-readonly-input {
+  border: none;
+  text-align: center;
+}
+
+.mypage-travel-board-section {
+  display: flex;
+  justify-content: center;
+}
+
+.mypage-travel-board-section1 {
+  display: inline-block;
+  margin-right: 50px;
+  text-align: center;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 5px;
+  margin-bottom: 50px;
+  height: 700px;
+}
+
+.mypage-travel-board-img-box {
+  height: 50%;
+  width: 50%;
+  background-color: blue;
+}
+
+.mypage-travel-board-manage-box {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mypage-travel-board-cal {
+  width: 700px;
+}
+
+.mypage-travel-board-title {
+  margin-bottom: 100px;
+}
+
+.mypage-travel-board-profile-img {
+  width: 200px;
+  height: 200px;
+}
+
+.mypage-travel-board-section2 {
+  width: 800px;
+}
+
+.mypage-travel-board-con22 input {
+  width: 80%;
+  margin: 5px 0 5px 20px;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  align-content: center;
+}
+
+.mypage-travel-board-td {
+  text-align: center;
+}
+
+.mypage-travel-board-search-option {
+  width: 100px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+}
+
+.mypage-travel-board-manage-box a {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.mypage-travel-board-bottom-section {
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.mypage-travel-board-pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mypage-travel-board-page-item {
+  margin: 0 5px;
+}
+
+.mypage-travel-board-page-link {
+  display: block;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.2s;
+  border: none;
+}
+
+.mypage-travel-board-page-link:hover {
+  background-color: #f0f0f0;
+}
