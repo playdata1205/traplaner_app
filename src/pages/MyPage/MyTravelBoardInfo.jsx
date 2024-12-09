@@ -28,7 +28,7 @@ const TravelBoardInfo = () => {
   const fetchData = async (travelId) => {
     console.log(localStorage.getItem('ACCESS_TOKEN'));
 
-    const response = await axiosInstance.get(
+    const response = await axios.get(
       `${API_BASE_URL}${MYPAGE}/my-page/board-info/${travelId}`,
       {
         headers: {
@@ -40,7 +40,7 @@ const TravelBoardInfo = () => {
 
     setTravel(response.data.travel);
     setJourney(response.data.Journey || []);
-    setTravelBoard(response.data.TravelBoard);
+    setTravelBoard(response.data.TravelBoard, []);
     setContent(response.data.TravelBoard?.content || '');
 
     // const journeyIds = (response.data.Journey || []).map(
