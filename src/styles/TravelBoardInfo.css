@@ -68,13 +68,15 @@
   gap: 5px;
 }
 
-.tb-like-icon {
+#like-icon {
+  /* 기본 색상 */
   color: #666;
   transition: color 0.2s ease;
   font-size: 1.2rem;
 }
 
-.tb-like-icon--active {
+#like-icon.liked {
+  /* 좋아요 클릭 후 색상 */
   color: #ff006a;
 }
 
