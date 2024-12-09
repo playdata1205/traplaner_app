@@ -1,52 +1,54 @@
-.container {
+.tb-container {
   width: 90%;
   max-width: 980px;
   padding: 40px 80px;
   background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 1%;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.tb-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 12px;
 }
 
-.author-date {
+.tb-meta {
   font-size: 14px;
   color: #606060;
   margin-bottom: 20px;
 }
 
-.heart {
+.tb-like-wrapper {
   float: right;
   margin-left: 10px;
 }
 
-.section {
+.tb-section {
   margin-bottom: 16px;
-  text-align: center;
+  text-align: left;
 }
 
-.photo img {
+.tb-image {
   max-width: 100%;
   height: auto;
 }
 
-.map-top {
+.tb-map {
   width: 100%;
   margin-top: 20px;
 }
 
-.day-group {
+.tb-day-container {
   margin-bottom: 40px;
   padding: 20px;
   border-radius: 8px;
   background-color: #f8f9fa;
 }
 
-.journey-item {
+.tb-journey-item {
   margin-bottom: 20px;
   padding: 15px;
   border-radius: 4px;
@@ -54,7 +56,7 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#like-button {
+.tb-like-btn {
   border: none;
   background: transparent;
   cursor: pointer;
@@ -78,7 +80,7 @@ h1 {
   color: #ff006a;
 }
 
-#like-count {
+.tb-like-count {
   font-size: 14px;
   color: #666;
   min-width: 20px;
