@@ -112,59 +112,54 @@ const MyTravelPage = () => {
   };
 
   return (
-    <div className='mypage'>
-      <div className='mypage__layout'>
-        <div className='mypage__sidebar'>
+    <div className='mypage-travel-container'>
+      <div className='mypage-travel__section-wrapper'>
+        <div className='mypage-travel__sidebar'>
           <img
             src={getProfileImage()}
-            alt='프로필 이미지'
-            className='mypage__profile-image'
+            alt='프사'
+            className='mypage-travel__profile-img'
+            style={{
+              width: '250px',
+              borderRadius: '50%',
+              marginBottom: '50px',
+              marginTop: '30px',
+            }}
           />
-          <nav className='mypage__nav'>
-            <a href='/my-page/pwChange' className='mypage__nav-link'>
-              계정관리
-            </a>
-            <a href='/my-page/mytravelboard' className='mypage__nav-link'>
-              내 게시물
-            </a>
-            <a
-              href='/my-page/mytravel'
-              className='mypage__nav-link mypage__nav-link--active'
-            >
+          <div className='mypage-travel__nav-menu'>
+            <a href='/my-page/pwChange'>계정관리</a>
+            <a href={`/my-page/mytravelboard`}>내 게시물</a>
+            <a href={`/my-page/mytravel`} style={{ fontWeight: 'bold' }}>
               나의 여행
             </a>
-            <a href='/my-page' className='mypage__nav-link'>
-              여행일정
-            </a>
-            <a href='/my-page/favorite' className='mypage__nav-link'>
-              좋아요한 게시물
-            </a>
-          </nav>
+            <a href={`/my-page`}>여행일정</a>
+            <a href={`/my-page/favorite`}>좋아요한 게시물</a>
+          </div>
         </div>
-        <div className='mypage__content'>
-          <div className='mypage__travel'>
+        <div className='mypage-travel__content'>
+          <div className='mypage-travel__list'>
             <select
-              className='mypage__travel-select'
+              className='mypage-travel__select'
               value={searchOption}
               onChange={handleSearchOptionChange}
             >
               <option value='pastOrder'>과거순</option>
               <option value='up-to-date-order'>최신순</option>
             </select>
-            <table className='mypage__travel-table'>
+            <table className='mypage-travel__table'>
               <thead>
                 <tr>
-                  <th className='mypage__travel-cell'>번호</th>
-                  <th className='mypage__travel-cell'>게시글 제목</th>
-                  <th className='mypage__travel-cell'>여행기간</th>
-                  <th className='mypage__travel-cell'>공유여부</th>
+                  <th style={{ width: '10%', padding: '12px' }}>번호</th>
+                  <th style={{ width: '40%', padding: '12px' }}>게시글 제목</th>
+                  <th style={{ width: '30%', padding: '12px' }}>여행기간</th>
+                  <th style={{ width: '20%', padding: '12px' }}>공유여부</th>
                 </tr>
               </thead>
               <tbody>
                 {travels.map((travel) => (
                   <tr key={travel.id}>
-                    <td className='mypage__travel-cell'>{travel.id}</td>
-                    <td className='mypage__travel-cell'>
+                    <td style={{ padding: '10px' }}>{travel.id}</td>
+                    <td style={{ padding: '10px' }}>
                       <Link
                         to={`/my-page/mytravelboard/info`}
                         state={{ travelId: travel.id }}
@@ -172,23 +167,22 @@ const MyTravelPage = () => {
                         {travel.title}
                       </Link>
                     </td>
-                    <td className='mypage__travel-cell'>
+                    <td style={{ padding: '10px' }}>
                       {moment(travel.startDate).format('YYYY-MM-DD')} ~
                       {moment(travel.endDate).format('YYYY-MM-DD')}
                     </td>
-                    <td className='mypage__travel-cell'>
+                    <td style={{ padding: '10px' }}>
                       <input
                         type='checkbox'
-                        className='mypage__travel-checkbox'
                         checked={travel.share === true}
                         onChange={() => toggleShare(travel.id)}
                       />
                     </td>
-                    <td className='mypage__travel-cell'>
+                    <td style={{ padding: '10px' }}>
                       <img
                         src='/assets/img/delete.png'
                         alt='삭제'
-                        className='mypage__travel-delete'
+                        style={{ width: 20, cursor: 'pointer' }}
                         onClick={() => deleteTravel(travel.id)}
                       />
                     </td>
@@ -196,12 +190,9 @@ const MyTravelPage = () => {
                 ))}
               </tbody>
             </table>
-            <div className='mypage__pagination'>
+            <div className='mypage-travel__pagination'>
               {pagination.prev && (
-                <button
-                  className='mypage__pagination-button'
-                  onClick={() => fetchTravels(pagination.begin - 1)}
-                >
+                <button onClick={() => fetchTravels(pagination.begin - 1)}>
                   이전
                 </button>
               )}
@@ -209,19 +200,12 @@ const MyTravelPage = () => {
                 { length: pagination.end - pagination.begin + 1 },
                 (_, i) => pagination.begin + i,
               ).map((page) => (
-                <button
-                  key={page}
-                  className='mypage__pagination-button'
-                  onClick={() => fetchTravels(page)}
-                >
+                <button key={page} onClick={() => fetchTravels(page)}>
                   {page}
                 </button>
               ))}
               {pagination.next && (
-                <button
-                  className='mypage__pagination-button'
-                  onClick={() => fetchTravels(pagination.end + 1)}
-                >
+                <button onClick={() => fetchTravels(pagination.end + 1)}>
                   다음
                 </button>
               )}

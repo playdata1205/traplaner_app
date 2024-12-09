@@ -46,36 +46,48 @@ const MyPage = ({ dtoList }) => {
   };
 
   return (
-    <div className='mypage'>
-      <div className='mypage__content'>
-        <div className='mypage__sidebar'>
+    <div className='travel-mypage'>
+      <div className='travel-mypage__content'>
+        <div className='travel-mypage__sidebar'>
           <img
             src={getProfileImage()}
             alt='프로필 이미지'
-            className='mypage__profile'
+            className='travel-mypage__profile-image'
           />
-          <nav className='mypage__nav'>
-            <a href='/my-page/pwChange' className='mypage__nav-link'>
+          <nav className='travel-mypage__navigation'>
+            <a
+              href='/my-page/pwChange'
+              className='travel-mypage__navigation-link'
+            >
               계정관리
             </a>
-            <a href='/my-page/mytravelboard' className='mypage__nav-link'>
+            <a
+              href='/my-page/mytravelboard'
+              className='travel-mypage__navigation-link'
+            >
               내 게시물
             </a>
-            <a href='/my-page/mytravel' className='mypage__nav-link'>
+            <a
+              href='/my-page/mytravel'
+              className='travel-mypage__navigation-link'
+            >
               나의 여행
             </a>
             <a
               href='/my-page'
-              className='mypage__nav-link mypage__nav-link--active'
+              className='travel-mypage__navigation-link travel-mypage__navigation-link--active'
             >
               여행일정
             </a>
-            <a href='/my-page/favorite' className='mypage__nav-link'>
+            <a
+              href='/my-page/favorite'
+              className='travel-mypage__navigation-link'
+            >
               좋아요한 게시물
             </a>
           </nav>
         </div>
-        <div className='mypage__calendar'>
+        <div className='travel-mypage__calendar-container'>
           <FullCalendar
             plugins={[dayGridPlugin]}
             initialView='dayGridMonth'

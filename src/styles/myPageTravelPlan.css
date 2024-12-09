@@ -1,17 +1,18 @@
-.mypage {
+.mypage-travel-container {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 100px;
 }
 
-.mypage__layout {
+.mypage-travel__section-wrapper {
   display: flex;
   justify-content: center;
 }
 
-.mypage__sidebar {
+.mypage-travel__sidebar {
   display: inline-block;
   margin-right: 50px;
   text-align: center;
@@ -21,55 +22,60 @@
   height: 700px;
 }
 
-.mypage__profile-image {
-  width: 250px;
-  border-radius: 50%;
-  margin-bottom: 50px;
-  margin-top: 30px;
+.mypage-travel__profile-img-box {
+  height: 50%;
+  width: 50%;
+  background-color: blue;
 }
 
-.mypage__nav {
+.mypage-travel__nav-menu {
   width: 500px;
   display: flex;
   flex-direction: column;
 }
 
-.mypage__nav-link {
+.mypage-travel__nav-menu a {
   margin-bottom: 20px;
   text-decoration: none;
   color: black;
 }
 
-.mypage__nav-link--active {
+.mypage-travel__nav-link {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.mypage-travel__nav-link--active {
   font-weight: bold;
 }
 
-.mypage__content {
+.mypage-travel__content {
   width: 800px;
 }
 
-.mypage__travel {
+.mypage-travel__list {
   width: 100%;
 }
 
-.mypage__travel-select {
+.mypage-travel__select {
   width: 100px;
   border: 2px solid lightgray;
   border-radius: 5px;
   margin-bottom: 20px;
 }
 
-.mypage__travel-table {
+.mypage-travel__table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.mypage__travel-cell {
+.mypage-travel__table-cell {
   padding: 10px;
   text-align: center;
 }
 
-.mypage__travel-checkbox {
+.mypage-travel__share-checkbox {
   width: 70%;
   margin: 5px 0 5px 20px;
   cursor: pointer;
@@ -77,18 +83,18 @@
   text-align: center;
 }
 
-.mypage__travel-delete {
+.mypage-travel__delete-btn {
   width: 20px;
   cursor: pointer;
 }
 
-.mypage__pagination {
+.mypage-travel__pagination {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-.mypage__pagination-button {
+.mypage-travel__pagination-btn {
   margin: 0 5px;
   padding: 10px 15px;
   border: none;
@@ -96,6 +102,6 @@
   cursor: pointer;
 }
 
-.mypage__pagination-button:hover {
+.mypage-travel__pagination-btn:hover {
   background-color: #f0f0f0;
 }
