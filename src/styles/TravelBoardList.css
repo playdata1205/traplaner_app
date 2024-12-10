@@ -37,9 +37,6 @@ main {
 
 .list-container .goPost div {
   padding: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .list-container .goPost h4 {
@@ -51,6 +48,9 @@ main {
   margin: 5px;
   font-size: 0.9em;
   color: #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bottom-section {
