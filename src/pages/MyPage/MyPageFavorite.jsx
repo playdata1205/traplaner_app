@@ -54,7 +54,7 @@ const MyPageFavorite = () => {
     if (!profile) {
       return '/assets/img/anonymous.jpg';
     } else {
-      return profile;
+      return `https://traplan-img.s3.ap-northeast-2.amazonaws.com/${profile}`;
     }
   };
 
