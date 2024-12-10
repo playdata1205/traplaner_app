@@ -115,17 +115,25 @@ const MyPage = () => {
         </div>
         <div className='pw-change-content'>
           <div className='pw-change-info-box'>
-            <img
-              src={getProfileImage()}
-              alt='프사'
+            <div
               style={{
-                width: '200px',
-                borderRadius: '50%',
-                marginBottom: '50px',
-                marginTop: '30px',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                width: '100%',
               }}
-              className='rounded-pill'
-            />
+            >
+              <img
+                src={getProfileImage()}
+                alt='프사'
+                style={{
+                  width: '200px',
+                  borderRadius: '50%',
+                  marginBottom: '50px',
+                  marginTop: '30px',
+                }}
+                className='rounded-pill'
+              />
+            </div>
             <input
               type='email'
               value={login.email}
