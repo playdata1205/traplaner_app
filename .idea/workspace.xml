@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2b42fea-0f23-4c04-94e0-0c0925507fa2" name="변경" comment="mypage 임시 커밋">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPageFavorite.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPageFavorite.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPagePwChange.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPagePwChange.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPageTravelBoard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPageTravelBoard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPageTravelPlan.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPageTravelPlan.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/Mypage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/Mypage.css" afterDir="false" />
-    </list>
+    <list default="true" id="c2b42fea-0f23-4c04-94e0-0c0925507fa2" name="변경" comment="mypage 임시 커밋" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

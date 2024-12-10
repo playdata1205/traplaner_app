@@ -32,12 +32,12 @@ const MyPageFavorite = () => {
       },
     );
 
-    console.log('favorites', response.data.favorites.content);
+    console.log('favorites', response.data.favorites.);
     console.log('travelBoards', response.data.travelBoards);
     console.log('travels', response.data.travels);
 
     const responseData = response.data;
-    setFavorites(responseData.favorites);
+    setFavorites(responseData.favorites.content);
     setTravelBoards(responseData.travelBoards);
     setTravels(responseData.travels);
     setPageInfo({
