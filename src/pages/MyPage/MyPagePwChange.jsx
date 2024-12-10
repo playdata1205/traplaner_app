@@ -119,7 +119,7 @@ const MyPage = () => {
               src={getProfileImage()}
               alt='프사'
               style={{
-                width: '200px',
+                width: '250px',
                 borderRadius: '50%',
               }}
               className='rounded-pill'
