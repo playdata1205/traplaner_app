@@ -23,6 +23,7 @@ const TravelBoardList = () => {
       const totalPages = response.data.result.totalPages || 0;
       setTravelBoardList(content);
       setTotalPages(totalPages);
+      console.log(content);
     } catch (error) {
       console.error('Error fetching travel boards:', error);
       setError('데이터를 불러오는데 실패했습니다.');
