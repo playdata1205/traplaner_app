@@ -37,6 +37,9 @@ main {
 
 .list-container .goPost div {
   padding: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .list-container .goPost h4 {
