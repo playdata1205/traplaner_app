@@ -22,7 +22,7 @@ const MyPageFavorite = () => {
     fetchFavorite();
   }, []);
 
-  const id = localStorage.getItem('id');
+  const id = localStorage.getItem('USER_ID');
   const fetchFavorite = async (pageNo, amount) => {
     const response = await axiosInstance.get(
       `${API_BASE_URL}${TRAVELBOARD}/my-favoriteList/${id}`,

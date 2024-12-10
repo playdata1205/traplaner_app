@@ -33,7 +33,9 @@ export const Header = () => {
             alt='프사'
             className='profile-img'
           />
-          <span className='navbar-text'>&nbsp;&nbsp;Welcome {nickName}</span>
+          <span className='navbar-text'>
+            &nbsp;&nbsp;HELLO HELLO HELLO{nickName}
+          </span>
         </>
       )}
 
