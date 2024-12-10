@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
+import { API_BASE_URL, MYPAGE, TRAVELBOARD } from '../../configs/host-config';
 import axios from 'axios';
 import login from '../../context/UserContext';
 import moment from 'moment';
@@ -22,9 +22,10 @@ const MyPageFavorite = () => {
     fetchFavorite();
   }, []);
 
+  const id = localStorage.getItem('id');
   const fetchFavorite = async (pageNo, amount) => {
     const response = await axiosInstance.get(
-      `${API_BASE_URL}${MYPAGE}/my-page/favorite?page=pageNo&size=amount`,
+      `${API_BASE_URL}${TRAVELBOARD}/my-favoriteList/${id}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
