@@ -119,7 +119,7 @@ const MyTravelPage = () => {
             alt='프사'
             className='mypage-travel__profile-img'
             style={{
-              width: '250px',
+              width: '200px',
               borderRadius: '50%',
               marginBottom: '50px',
               marginTop: '30px',

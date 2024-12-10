@@ -23,10 +23,12 @@ const MyPage = ({ dtoList }) => {
 
       const data = res.data;
       const formattedEvents = data.map((travel) => {
+        const endDate = new Date(travel.endDate);
+        endDate.setDate(endDate.getDate() + 1);
         return {
           title: travel.title,
-          start: travel.startDate.toISOString().split('T')[0],
-          end: travel.endDate.toISOString().split('T')[0],
+          start: travel.startDate,
+          end: endDate,
           id: travel.id,
         };
       });

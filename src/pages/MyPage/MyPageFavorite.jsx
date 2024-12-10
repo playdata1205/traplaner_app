@@ -68,7 +68,7 @@ const MyPageFavorite = () => {
               src={getProfileImage()}
               alt='Profile'
               style={{
-                width: '250px',
+                width: '200px',
                 borderRadius: '50%',
                 marginBottom: '50px',
                 marginTop: '30px',

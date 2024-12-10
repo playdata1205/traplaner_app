@@ -96,7 +96,7 @@ const MyPage = () => {
             src={getProfileImage()}
             alt='프사'
             style={{
-              width: '250px',
+              width: '200px',
               borderRadius: '50%',
               marginBottom: '50px',
               marginTop: '30px',

@@ -6,11 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c2b42fea-0f23-4c04-94e0-0c0925507fa2" name="변경" comment="mypage 임시 커밋">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Main/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/Main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Member/SignIn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Member/SignIn.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPageFavorite.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPageFavorite.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPagePwChange.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPagePwChange.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/TravelBoard/TravelBoardInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TravelBoard/TravelBoardInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/TravelBoardInfo.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/TravelBoardInfo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPageTravelBoard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPageTravelBoard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MyPage/MyPageTravelPlan.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MyPage/MyPageTravelPlan.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/Mypage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/Mypage.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +52,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "MyPagedddd",
+    "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -96,7 +96,7 @@
       <workItem from="1733359904651" duration="856000" />
       <workItem from="1733715897080" duration="390000" />
       <workItem from="1733716304533" duration="931000" />
-      <workItem from="1733718994436" duration="2112000" />
+      <workItem from="1733718994436" duration="2710000" />
     </task>
     <servers />
   </component>
