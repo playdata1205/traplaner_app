@@ -67,7 +67,7 @@ const MainPage = () => {
           >
             {card.travelImg ? (
               <img
-                src={`https://traplaner-images.s3.ap-northeast-2.amazonaws.com/${card.travelImg}`}
+                src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${card.travelImg}`}
                 alt={card.title}
                 className='card-img-top'
               />
@@ -136,7 +136,7 @@ const MainPage = () => {
               >
                 <a href={`/travelboard/info/${travel.id}`}>
                   <img
-                    src={`https://traplaner-images.s3.ap-northeast-2.amazonaws.com/${travel.travelImg}`}
+                    src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${travel.travelImg}`}
                     className='d-block w-100'
                     alt={travel.title}
                   />

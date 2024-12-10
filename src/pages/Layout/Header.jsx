@@ -28,7 +28,11 @@ export const Header = () => {
       {isLoggedIn && (
         <>
           {/* 프로필 이미지 */}
-          <img src={profileImg} alt='프사' className='profile-img' />
+          <img
+            src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${profileImg}`}
+            alt='프사'
+            className='profile-img'
+          />
           <span className='navbar-text'>&nbsp;&nbsp;Welcome {nickName}</span>
         </>
       )}

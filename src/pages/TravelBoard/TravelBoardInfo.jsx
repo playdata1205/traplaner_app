@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { login } from '../../context/UserContext';
 import axios from 'axios';
+import axiosInstance from '../../configs/axios-config';
 import { API_BASE_URL, TRAVELBOARD } from '../../configs/host-config';
 import '../../styles/TravelBoardInfo.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,7 +22,7 @@ const TravelBoardDetail = () => {
   const fetchLikeStatus = async () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
-      const response = await axios.get(
+      const response = await axiosInstance.get(
         `${API_BASE_URL}${TRAVELBOARD}/toggle-like/status/${boardId}`,
         {
           headers: token
@@ -46,7 +47,7 @@ const TravelBoardDetail = () => {
       setIsLoading(true);
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           `${API_BASE_URL}${TRAVELBOARD}/info/${boardId}`,
           {
             headers: token
@@ -57,6 +58,7 @@ const TravelBoardDetail = () => {
           },
         );
         const data = response.data.result;
+        console.log(data);
         setTravelData(data);
         setJourney(data.journeys || []);
         setLikeCount(data.likeCount || 0);
@@ -94,7 +96,7 @@ const TravelBoardDetail = () => {
 
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${API_BASE_URL}${TRAVELBOARD}/toggle-like/${boardId}`,
         {},
         {
@@ -120,52 +122,65 @@ const TravelBoardDetail = () => {
   const generateMapUrl = () => {
     if (!journey || journey.length === 0) return null;
 
+    // 장소가 하나일 경우
     if (journey.length === 1) {
-      return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&q=place_id:${journey[0].locationPin}`;
+      const location = encodeURIComponent(
+        journey[0].accommodationName || journey[0].journeyName,
+      );
+      return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&q=${location}`;
     }
 
-    const origin = `place_id:${journey[0].locationPin}`;
-    const destination = `place_id:${journey[journey.length - 1].locationPin}`;
-    const waypoints = journey
-      .slice(1, -1)
-      .map((j) => `place_id:${j.locationPin}`)
-      .join('|');
+    // 여러 장소가 있는 경우
+    const locations = journey.map((j) =>
+      encodeURIComponent(j.accommodationName || j.journeyName),
+    );
+    const origin = locations[0];
+    const destination = locations[locations.length - 1];
+    const waypoints = locations.slice(1, -1).join('|');
 
-    return `https://www.google.com/maps/embed/v1/directions?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&origin=${origin}&destination=${destination}${
-      waypoints ? `&waypoints=${waypoints}` : ''
-    }`;
+    return `https://www.google.com/maps/embed/v1/directions?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I
+      &origin=${origin}
+      &destination=${destination}
+      ${waypoints ? `&waypoints=${waypoints}` : ''}
+      &mode=driving`.replace(/\s+/g, '');
   };
 
   return isLoading ? (
     <div>Loading...</div>
   ) : (
-    <div className='tb-container'>
-      <h1 className='tb-title'>{travelData.title}</h1>
-      <div className='tb-meta'>
+    <div className='traplan-board-detail'>
+      <h1 className='traplan-board-detail__title'>{travelData.title}</h1>
+      <div className='traplan-board-detail__metadata'>
         {travelData.writer} {travelData.writeDate}
-        <span className='tb-like-wrapper'>
-          <button className='tb-like-btn' onClick={toggleLike}>
+        <span className='traplan-board-detail__heart-container'>
+          <button
+            className='traplan-board-detail__like-button'
+            onClick={toggleLike}
+          >
             <FontAwesomeIcon
-              className={`tb-like-icon ${isLiked ? 'tb-like-icon--active' : ''}`}
+              className={`traplan-board-detail__like-icon ${isLiked ? 'traplan-board-detail__like-icon--active' : ''}`}
               icon={faHeart}
             />
-            <span className='tb-like-count'>{likeCount}</span>
+            <span className='traplan-board-detail__like-count'>
+              {likeCount}
+            </span>
           </button>
         </span>
       </div>
-      <div className='tb-section'>
+      <div className='traplan-board-detail__content-section traplan-board-detail__image-wrapper'>
         <img
-          className='tb-image'
-          src={`/display/${travelData.img}`}
+          src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${travelData.travelImg}`}
           alt='Travel'
           style={{ width: '700px', height: '500px' }}
         />
       </div>
-      <div className='tb-section'>{travelData.content}</div>
+      <div className='traplan-board-detail__content-section traplan-board-detail__text-content'>
+        {travelData.content}
+      </div>
 
       {journey.length > 0 && (
         <iframe
-          className='tb-map'
+          className='traplan-board-detail__map-container'
           height='450'
           src={generateMapUrl()}
           allowFullScreen
@@ -173,15 +188,20 @@ const TravelBoardDetail = () => {
       )}
 
       {Object.entries(groupedJourneys).map(([day, dayJourneys]) => (
-        <div key={day} className='tb-day-container'>
-          <h1 className='tb-title'>DAY {day}</h1>
+        <div key={day} className='traplan-board-detail__day-section'>
+          <h1 className='traplan-board-detail__title'>DAY {day}</h1>
           {dayJourneys.map((journey, index) => (
-            <div key={index} className='tb-journey-item'>
-              <h4 className='tb-title'>{journey.startTime}</h4>
-              <div className='tb-section'>
-                <img src={`/display/${journey.journeyImg}`} alt='Journey' />
+            <div key={index} className='traplan-board-detail__journey-item'>
+              <h4 className='traplan-board-detail__metadata'>
+                {journey.startTime}
+              </h4>
+              <div className='traplan-board-detail__content-section traplan-board-detail__image-wrapper'>
+                <img
+                  src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${journey.journeyImg}`}
+                  alt='Journey'
+                />
               </div>
-              <div className='tb-section'>
+              <div className='traplan-board-detail__content-section'>
                 {journey.accommodationName} {journey.journeyName}
               </div>
             </div>

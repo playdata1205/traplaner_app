@@ -212,7 +212,7 @@ const TravelPlan = () => {
       );
 
       const result = response.data;
-      window.location.href = `/mypage/mytravel`;
+      window.location.href = `/my-page`;
     } catch (error) {
       console.error('여행 계획 저장 중 오류 발생:', error);
       alert('여행 계획 저장에 실패했습니다. 다시 시도해주세요.');

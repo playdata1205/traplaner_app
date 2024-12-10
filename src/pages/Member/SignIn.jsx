@@ -41,6 +41,7 @@ const SignIn = () => {
       const profile = res.data.result.profile;
 
       onLogin(token, id, nickName, loginMethod, profile);
+      navigate('/');
     } catch (e) {
       console.log(e);
       // 옵셔널 체이닝 (optional chaining)

@@ -388,7 +388,7 @@
 #display-budget {
   margin-right: 10px;
 }
-*/ .journey-view__delete-btn:hover {
+.journey-view__delete-btn:hover {
   background-color: #ff6b63;
 }
 

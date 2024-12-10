@@ -24,7 +24,6 @@
   font-weight: 700;
 }
 
-/* 캐러셀 스타일링 */
 .custom-carousel {
   border-radius: 12px;
   overflow: hidden;
@@ -34,12 +33,12 @@
 }
 
 .carousel-caption {
-  background: linear-gradient(
+  /* background: linear-gradient(
     to bottom,
     rgba(1, 97, 24, 0.6) 0%,
     transparent 50%,
     rgba(1, 97, 24, 0.6) 100%
-  );
+  ); */
   top: 0;
   bottom: 0;
   left: 0;
@@ -72,7 +71,6 @@
   transform: translateY(-50%);
 }
 
-/* 카드 컨테이너 스타일링 */
 #card-container {
   gap: 1rem;
   padding: 0.5rem;
@@ -83,12 +81,10 @@
   margin: 0 auto;
 }
 
-/* 로그인 상태일 때의 카드 컨테이너 스타일링 */
 #card-container.logged-in {
   justify-content: center;
 }
 
-/* 여행 카드 스타일링 개선 */
 .travel-card {
   transition: all 0.3s ease;
   border-radius: 15px;
@@ -123,7 +119,6 @@
   transform: scale(1.05);
 }
 
-/* 일반 카드 스타일링 */
 .card {
   border: none;
   border-radius: 12px;
@@ -162,7 +157,6 @@
   line-height: 1.2;
 }
 
-/* 새로운 여행 계획하기 카드 스타일링 */
 .add-travel-link {
   text-decoration: none;
   height: 100%;
@@ -186,7 +180,6 @@
   text-align: center;
 }
 
-/* 이미지 없음 스타일링 */
 .no-image-container {
   background-color: #f8f9fa;
   height: 150px;
@@ -203,7 +196,6 @@
   background-color: #e9ecef;
 }
 
-/* 페이지네이션 스타일링 */
 .custom-pagination .page-link {
   color: #016118;
   border: none;
@@ -222,7 +214,6 @@
   color: #f04136;
 }
 
-/* 컨테이너 대 너비 설정 */
 .custom-container {
   max-width: 1200px !important;
   margin: 0 auto;
@@ -231,7 +222,6 @@
   overflow: visible;
 }
 
-/* 그리드 조정 */
 @media (min-width: 768px) {
   .row-cols-md-3 > * {
     flex: 0 0 auto;
@@ -249,7 +239,6 @@
   }
 }
 
-/* 카드 최대 너비 축가 */
 .card,
 .travel-card {
   max-width: 320px;
@@ -257,13 +246,11 @@
   margin: 0 auto;
 }
 
-/* 추천 여행지 섹션 */
 .recommended-section {
   height: auto;
   margin-bottom: 1.5rem;
 }
 
-/* 여행 리스트 섹션 */
 .travel-list-section {
   height: auto;
   margin-top: 1.5rem;
@@ -271,13 +258,11 @@
   padding: 0 0.5rem;
 }
 
-/* 캐러셀 이미지 높이 조정 */
 .custom-carousel img {
   height: 380px;
   object-fit: cover;
 }
 
-/* 여행 카드 이미지 높이 조정 */
 .card-img-top {
   height: 140px;
   object-fit: cover;
