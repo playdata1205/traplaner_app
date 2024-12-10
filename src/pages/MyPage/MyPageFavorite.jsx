@@ -32,7 +32,7 @@ const MyPageFavorite = () => {
       },
     );
 
-    console.log('favorites', response.data.favorites.);
+    console.log('favorites', response.data.favorites);
     console.log('travelBoards', response.data.travelBoards);
     console.log('travels', response.data.travels);
 
