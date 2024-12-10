@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 100px;
 }
 
 .pw-change-section {
@@ -53,9 +54,6 @@
 }
 
 .pw-change-info-box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   border: 1px solid lightgray;
   border-radius: 5px;
   height: 700px;
@@ -70,7 +68,7 @@
   border-radius: 10px;
   text-align: center;
   align-content: center;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   border: 1px solid lightgray;
 }
 
