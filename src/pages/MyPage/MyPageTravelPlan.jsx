@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { login } from '../../context/UserContext';
-import { get } from 'lodash';
 import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
 import axios from 'axios';
 import '../../styles/myPageTravelPlan.css';
