@@ -210,9 +210,9 @@ const TravelBoardInfo = () => {
                         .click()
                     }
                   >
-                    {!journeyImg[item.id] &&
+                    {/* {!journeyImg[item.id] &&
                       !item.journeyImg &&
-                      '여정의 사진을 등록해주세요!!'}
+                      '여정의 사진을 등록해주세요!!'} */}
                   </div>
                   <input
                     type='file'

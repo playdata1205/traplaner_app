@@ -99,16 +99,16 @@ const SignIn = () => {
       <div style={styles.divider}>
         <span style={styles.dividerText}>또는</span>
       </div>
-      <div style={styles.snsLogo}>
-        {/* <a href='../kakao/login'>
+      {/* <div style={styles.snsLogo}>
+        <a href='../kakao/login'>
           <img
             src='/assets/img/kakao_login_small.png'
             className='login-btn'
             alt='kakaoBtn'
             style={styles.snsBtn}
           />
-        </a> */}
-      </div>
+        </a>
+      </div> */}
     </div>
   );
 };
