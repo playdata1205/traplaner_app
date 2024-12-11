@@ -2,18 +2,18 @@ import React, { useContext } from 'react';
 import { login } from '../context/UserContext';
 import { Navigate } from 'react-router-dom';
 
-// 라우터 쪽에서 로그인 여부나 역할을 검사하는 기능을 담당하는 privateRouter 생성.
-const PrivateRouter = (element) => {
+// element prop을 받도록 수정
+const PrivateRouter = ({ element }) => {
   const { isLoggedIn, isInit } = useContext(login);
 
   if (!isInit) return <div>Loading...</div>;
 
   if (!isLoggedIn) {
-    alert('로그인 안함!');
-    // to=보내고 싶은 페이지 렌더링 주소
-    // replace = 사용자가 뒤로가기 버튼을 눌러도 이전 페이지로 돌아가지 않게 됨.
-    return <Navigate to='/login' replace />;
+    alert('로그인이 필요합니다!');
+    return <Navigate to='/members/sign-in' replace />;
   }
+
+  // element를 직접 반환
   return element;
 };
 

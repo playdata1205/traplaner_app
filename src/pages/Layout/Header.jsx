@@ -28,8 +28,14 @@ export const Header = () => {
       {isLoggedIn && (
         <>
           {/* 프로필 이미지 */}
-          <img src={profileImg} alt='프사' className='profile-img' />
-          <span className='navbar-text'>&nbsp;&nbsp;Welcome {nickName}</span>
+          <img
+            src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${profileImg}`}
+            alt='프사'
+            className='profile-img'
+          />
+          <span className='navbar-text'>
+            &nbsp;&nbsp;HELLO HELLO HELLO{nickName}
+          </span>
         </>
       )}
 
@@ -48,7 +54,7 @@ export const Header = () => {
         {isLoggedIn ? (
           <>
             <li className='nav-item'>
-              <a href={`/my-page/${login.id}`} className='nav-link'>
+              <a href={`/my-page`} className='nav-link'>
                 마이페이지
               </a>
             </li>

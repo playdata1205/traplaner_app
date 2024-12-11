@@ -1,0 +1,99 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 15px;
+}
+
+.list-container {
+  max-width: 1050px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 45px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.list-container .goPost {
+  text-decoration: none;
+  color: black;
+  border: 1px solid #ddd;
+  border-radius: 2%;
+  overflow: hidden;
+  transition: transform 0.2s;
+  height: 300px;
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+
+  object-fit: cover;
+}
+
+.list-container .goPost div {
+  padding: 6px;
+}
+
+.list-container .goPost h4 {
+  margin: 5px;
+  color: #373737;
+}
+
+.list-container .goPost p {
+  margin: 5px;
+  font-size: 0.9em;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottom-section {
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  list-style: none;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 2px;
+}
+
+.page-link {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.page-link:hover:not(:disabled) {
+  background: #f0f0f0;
+}
+
+.page-link:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.allList {
+  margin-top: 0px;
+}

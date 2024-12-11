@@ -1,0 +1,107 @@
+.mypage-travel-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.mypage-travel__section-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.mypage-travel__sidebar {
+  display: inline-block;
+  margin-right: 50px;
+  text-align: center;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 5px;
+  margin-bottom: 50px;
+  height: 700px;
+}
+
+.mypage-travel__profile-img-box {
+  height: 50%;
+  width: 50%;
+  background-color: blue;
+}
+
+.mypage-travel__nav-menu {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mypage-travel__nav-menu a {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.mypage-travel__nav-link {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.mypage-travel__nav-link--active {
+  font-weight: bold;
+}
+
+.mypage-travel__content {
+  width: 800px;
+}
+
+.mypage-travel__list {
+  width: 100%;
+}
+
+.mypage-travel__select {
+  width: 100px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.mypage-travel__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mypage-travel__table-cell {
+  padding: 10px;
+  text-align: center;
+}
+
+.mypage-travel__share-checkbox {
+  width: 70%;
+  margin: 5px 0 5px 20px;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
+
+.mypage-travel__delete-btn {
+  width: 20px;
+  cursor: pointer;
+}
+
+.mypage-travel__pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.mypage-travel__pagination-btn {
+  margin: 0 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mypage-travel__pagination-btn:hover {
+  background-color: #f0f0f0;
+}

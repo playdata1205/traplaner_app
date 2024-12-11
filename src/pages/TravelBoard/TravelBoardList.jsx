@@ -1,137 +1,135 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../styles/TravelBoard.css'; // 스타일을 별도의 CSS 파일로 관리합니다.
+import moment from 'moment';
+import { API_BASE_URL, TRAVELBOARD } from '../../configs/host-config';
+import '../../styles/TravelBoardList.css';
 
-const TravelBoard = ({ tbList, paginationInfo, searchOptions }) => {
-  const [searchType, setSearchType] = useState(searchOptions.type || 'title');
-  const [sortType, setSortType] = useState(searchOptions.sortType || 'new');
-  const [keyword, setKeyword] = useState(searchOptions.keyword || '');
-  const [currentPage, setCurrentPage] = useState(paginationInfo.pageNo || 1);
+const TravelBoardList = () => {
+  const [travelBoardList, setTravelBoardList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [pageGroup, setPageGroup] = useState(0); // 페이지 그룹 상태 추가
+
+  const fetchTravelBoards = async (page = 0) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}${TRAVELBOARD}/list?page=${page}&size=6`,
+      );
+      const content = response.data.result.content || [];
+      const totalPages = response.data.result.totalPages || 0;
+      setTravelBoardList(content);
+      setTotalPages(totalPages);
+    } catch (error) {
+      console.error('Error fetching travel boards:', error);
+      setError('데이터를 불러오는데 실패했습니다.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    setSearchType(searchOptions.type || 'title');
-    setSortType(searchOptions.sortType || 'new');
-    setKeyword(searchOptions.keyword || '');
-  }, [searchOptions]);
+    fetchTravelBoards(currentPage);
+  }, [currentPage]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // 검색 요청 처리
-    console.log({ searchType, sortType, keyword });
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  // 페이지 그룹 계산 로직
+  const pagesPerGroup = 5; // 한 그룹당 보여줄 페이지 수
+  const totalGroups = Math.ceil(totalPages / pagesPerGroup);
+  const startPage = pageGroup * pagesPerGroup;
+  const endPage = Math.min(startPage + pagesPerGroup, totalPages);
+
+  // 페이지 그룹 이동 핸들러
+  const handlePrevGroup = () => {
+    if (pageGroup > 0) {
+      setPageGroup(pageGroup - 1);
+      setCurrentPage(startPage - 1);
+    }
+  };
+
+  const handleNextGroup = () => {
+    if (pageGroup < totalGroups - 1) {
+      setPageGroup(pageGroup + 1);
+      setCurrentPage(startPage + pagesPerGroup);
+    }
   };
 
   return (
-    <div className='allList'>
-      {/* 검색창 */}
-      <div className='top-section'>
-        <form onSubmit={handleSearch} className='search'>
-          <select
-            className='form-select'
-            value={sortType}
-            onChange={(e) => setSortType(e.target.value)}
-          >
-            <option value='new'>최신순</option>
-            <option value='old'>과거순</option>
-            <option value='best'>좋아요순</option>
-          </select>
-          <select
-            className='form-select'
-            value={searchType}
-            onChange={(e) => setSearchType(e.target.value)}
-          >
-            <option value='title'>제목</option>
-            <option value='content'>내용</option>
-            <option value='writer'>작성자</option>
-            <option value='tc'>제목+내용</option>
-          </select>
-          <input
-            type='search'
-            className='form-control'
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            placeholder='검색어 입력'
-          />
-          <button type='submit' id='searching'>
-            <i
-              className='fa-solid fa-magnifying-glass fa-rotate-by'
-              style={{ color: '#000' }}
-            ></i>
-          </button>
-        </form>
-      </div>
-
-      {/* 목록 */}
-      <main className='list'>
-        <div className='list-container'>
-          {tbList.map((tb) => (
+    <main className='allList'>
+      <div className='list-container'>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          travelBoardList.map((board) => (
             <Link
-              to={`/travelboard/info/${tb.boardId}`}
+              key={board.id}
+              to={`/travelboard/info/${board.id}`}
               className='goPost'
-              key={tb.boardId}
             >
               <img
-                src={`/display/${tb.img}`}
-                alt='여행이미지'
+                src={`https://traplan-img.s3.ap-northeast-2.amazonaws.com/${board.travelImg}`}
+                alt={`${board.title} 여행 이미지`}
                 className='image'
               />
               <div>
-                <h4>{tb.shortTitle}</h4>
-                <p>{tb.writer}</p>
-                <p>{tb.writeDate}</p>
+                <h4>{moment(board.writeDate).format('YYYY-MM-DD')}</h4>
+                <h4>{board.title}</h4>
+                <p>{board.nickName}</p>
+                <p>❤️ {board.likeCount}</p>
               </div>
             </Link>
-          ))}
-        </div>
-      </main>
-
-      {/* 페이지 버튼 */}
-      <div className='bottom-section'>
-        <nav>
-          <ul className='pagination'>
-            {paginationInfo.prev && (
-              <li className='page-item'>
-                <Link
-                  className='page-link'
-                  to={`/travelboard/list?pageNo=${paginationInfo.begin - 1}`}
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                >
-                  &lt;&lt;
-                </Link>
-              </li>
-            )}
-            {Array.from(
-              { length: paginationInfo.end - paginationInfo.begin + 1 },
-              (_, i) => paginationInfo.begin + i,
-            ).map((i) => (
-              <li
-                className={`page-item ${currentPage === i ? 'active' : ''}`}
-                key={i}
-              >
-                <Link
-                  className='page-link'
-                  to={`/travelboard/list?pageNo=${i}`}
-                  onClick={() => setCurrentPage(i)}
-                >
-                  {i}
-                </Link>
-              </li>
-            ))}
-            {paginationInfo.next && (
-              <li className='page-item'>
-                <Link
-                  className='page-link'
-                  to={`/travelboard/list?pageNo=${paginationInfo.end + 1}`}
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                >
-                  &gt;&gt;
-                </Link>
-              </li>
-            )}
-          </ul>
-        </nav>
+          ))
+        )}
       </div>
-    </div>
+
+      <div className='bottom-section'>
+        <ul className='pagination'>
+          {/* 이전 그룹 버튼 추가 */}
+          {pageGroup > 0 && (
+            <li className='page-item'>
+              <button className='page-link' onClick={handlePrevGroup}>
+                {'<<'}
+              </button>
+            </li>
+          )}
+
+          {/* 페이지 번호 버튼들 수정 */}
+          {Array.from(
+            { length: endPage - startPage },
+            (_, i) => startPage + i,
+          ).map((pageNum) => (
+            <li
+              key={pageNum}
+              className={`page-item ${pageNum === currentPage ? 'active' : ''}`}
+            >
+              <button
+                className='page-link'
+                onClick={() => handlePageChange(pageNum)}
+                disabled={pageNum === currentPage}
+              >
+                {pageNum + 1}
+              </button>
+            </li>
+          ))}
+
+          {/* 다음 그룹 버튼 추가 */}
+          {pageGroup < totalGroups - 1 && (
+            <li className='page-item'>
+              <button className='page-link' onClick={handleNextGroup}>
+                {'>>'}
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
+    </main>
   );
 };
 
-export default TravelBoard;
+export default TravelBoardList;

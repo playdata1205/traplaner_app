@@ -4,9 +4,9 @@
   box-sizing: border-box;
 }
 
-/* 네비게이션바 스타일 */
 #navbar {
   width: 100%;
+  height: 8vh;
   background-color: #ffffff;
   position: sticky;
   top: 0;
@@ -15,10 +15,10 @@
   justify-content: space-between;
   padding: 0.5em 1em;
   border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  z-index: 1000;
 }
 
-/* 로고 및 브랜드 스타일 */
 #navbar .brand {
   font-size: 1.5em;
   font-weight: bold;
@@ -30,21 +30,18 @@
   height: 45px;
 }
 
-/* 프로필 이미지 스타일 */
 #navbar .profile-img {
   width: 30px;
   height: 30px;
   border-radius: 50%;
 }
 
-/* 네비게이션 텍스트 스타일 */
 #navbar .navbar-text {
   margin-left: 0.5em;
   font-size: 1em;
   color: #666;
 }
 
-/* 네비게이션 메뉴 스타일 */
 #navbar-menu {
   display: flex;
   gap: 1em;
@@ -55,6 +52,7 @@
 
 #navbar-menu .nav-item {
   position: relative;
+  height: 24px;
 }
 
 #navbar-menu .nav-link {
@@ -62,13 +60,15 @@
   color: #333;
   font-size: 1em;
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 #navbar-menu .nav-link:hover {
-  color:#34b352; 
+  color: #34b352;
 }
 
-/* 모바일 메뉴 토글 버튼 */
 #navbar-toggle {
   display: none;
   font-size: 1.2em;
@@ -77,7 +77,6 @@
   cursor: pointer;
 }
 
-/* 모바일에서의 반응형 */
 @media (max-width: 768px) {
   #navbar-menu {
     display: none;

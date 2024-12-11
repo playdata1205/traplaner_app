@@ -1,0 +1,60 @@
+.travel-mypage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.travel-mypage__content {
+  display: flex;
+  justify-content: center;
+}
+
+.travel-mypage__sidebar {
+  display: inline-block;
+  margin-right: 50px;
+  text-align: center;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 5px;
+  margin-bottom: 50px;
+  height: 700px;
+}
+
+.travel-mypage__profile-image {
+  width: 200px;
+  border-radius: 50%;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+
+.travel-mypage__navigation {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.travel-mypage__navigation-link {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.travel-mypage__navigation-link--active {
+  font-weight: bold;
+}
+
+.travel-mypage__calendar-container {
+  width: 800px;
+}
+
+.travel-mypage__manage-link {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.profile-img {
+  width: 30px;
+}

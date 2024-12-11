@@ -1,58 +1,95 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react'; // FullCalendar React component
-import dayGridPlugin from '@fullcalendar/daygrid'; // for the day grid view
-import '@fullcalendar/common/main.css'; // Core CSS
-import '@fullcalendar/daygrid/main.css'; // DayGrid CSS
+import dayGridPlugin from '@fullcalendar/daygrid'; // for the day grid view // DayGrid CSS
+import { login } from '../../context/UserContext';
+import '../../styles/Mypage.css';
+import axiosInstance from '../../configs/axios-config';
+import { API_BASE_URL, MYPAGE } from '../../configs/host-config';
+import { element } from 'prop-types';
 
-const MyPage = ({ login, dtoList }) => {
+const MyPage = ({ dtoList }) => {
+  const { nickName, profile } = useContext(login);
+  const [TravelList, setTravelList] = useState([]);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    // DTO 데이터로 이벤트 세팅
-    const formattedEvents = dtoList.map((dto) => ({
-      title: dto.title,
-      start: dto.startDate,
-      end: dto.endDate,
-    }));
-    setEvents(formattedEvents);
-  }, [dtoList]);
+    const getTravelList = async () => {
+      const res = await axiosInstance.get(`${API_BASE_URL}${MYPAGE}/my-page`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
+        },
+      });
+      console.log('asd', res);
+
+      const data = res.data;
+      const formattedEvents = data.map((travel) => {
+        const endDate = new Date(travel.endDate);
+        endDate.setDate(endDate.getDate() + 1);
+        return {
+          title: travel.title,
+          start: travel.startDate,
+          end: endDate,
+          id: travel.id,
+        };
+      });
+
+      setEvents(formattedEvents);
+    };
+
+    getTravelList();
+  }, []);
 
   const getProfileImage = () => {
-    if (!login.profile) {
+    if (!profile) {
       return '/assets/img/anonymous.jpg';
+    } else {
+      return `https://traplan-img.s3.ap-northeast-2.amazonaws.com/${profile}`;
     }
-    if (login.loginMethod === 'KAKAO') {
-      return login.profile;
-    }
-    return `/display/${login.profile}`;
   };
 
   return (
-    <div className='container'>
-      <div className='mypage_section'>
-        <div className='mypage_section1'>
+    <div className='travel-mypage'>
+      <div className='travel-mypage__content'>
+        <div className='travel-mypage__sidebar'>
           <img
             src={getProfileImage()}
-            alt='프사'
-            className='profile-img'
-            style={{
-              width: '250px',
-              borderRadius: '50%',
-              marginBottom: '50px',
-              marginTop: '30px',
-            }}
+            alt='프로필 이미지'
+            className='travel-mypage__profile-image'
           />
-          <div className='manage_box'>
-            <a href='/my-page/pwChange'>계정관리</a>
-            <a href={`/my-page/mytravelboard/${login.nickName}`}>내 게시물</a>
-            <a href={`/my-page/mytravel/${login.id}`}>나의 여행</a>
-            <a href={`/my-page/${login.id}`} style={{ fontWeight: 'bold' }}>
+          <nav className='travel-mypage__navigation'>
+            <a
+              href='/my-page/pwChange'
+              className='travel-mypage__navigation-link'
+            >
+              계정관리
+            </a>
+            <a
+              href='/my-page/mytravelboard'
+              className='travel-mypage__navigation-link'
+            >
+              내 게시물
+            </a>
+            <a
+              href='/my-page/mytravel'
+              className='travel-mypage__navigation-link'
+            >
+              나의 여행
+            </a>
+            <a
+              href='/my-page'
+              className='travel-mypage__navigation-link travel-mypage__navigation-link--active'
+            >
               여행일정
             </a>
-            <a href={`/my-page/favorite/${login.id}`}>좋아요한 게시물</a>
-          </div>
+            <a
+              href='/my-page/favorite'
+              className='travel-mypage__navigation-link'
+            >
+              좋아요한 게시물
+            </a>
+          </nav>
         </div>
-        <div className='mypage_section2'>
+        <div className='travel-mypage__calendar-container'>
           <FullCalendar
             plugins={[dayGridPlugin]}
             initialView='dayGridMonth'
