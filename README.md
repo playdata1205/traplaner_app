@@ -49,7 +49,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 
 ## TRAPLAN_Front
 
- #### 본  프로젝트는  여행  플랜  웹  어플리케이션 TRAPLAN을 MSA 구조로 Refactoring 한 FrontEnd 프로젝트임임
+ #### 본  프로젝트는  여행  플랜  웹  어플리케이션 TRAPLAN을 MSA 구조로 Refactoring 한 FrontEnd 프로젝트임
 <br><br>
 
 ### 🔨 기술 스택
